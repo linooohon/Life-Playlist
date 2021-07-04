@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "personal_notes"
+version = "0.1.0"
+description = "login, and create your own to-do notes"
+authors = ["linooohon <linooohon@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+Flask = "^2.0.1"
+Flask-SQLAlchemy = "^2.5.1"
+Flask-Login = "^0.5.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
