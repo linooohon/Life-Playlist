@@ -3,3 +3,6 @@ __pycache__
 app/database.db
 venv
 .env
+test_employee.py
+employee.py
+tests_trial

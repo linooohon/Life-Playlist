@@ -8,12 +8,20 @@ from app.settings import DB_NAME
 
 db = SQLAlchemy()
 
+
 def create_app(config_name):
     app = Flask(__name__)
+
+    # 1. 普通直接設置方式
     # app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
     # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 
-    # 採用 config.py 設置
+    # print("===========")
+    # print(config_name)
+    # print(DB_NAME)
+    # print("===========")
+
+    # 2. 採用 config.py 設置，多了架構，擴充性
     app.config.from_object(config[config_name])
 
     db.init_app(app)

@@ -4,6 +4,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from flask_login import login_user, login_required, logout_user, current_user
 
+
+'''
+auth 負責 有關權限的 url 對應處理，
+'''
+# Make auth' Blueprint instance
 auth = Blueprint('auth', __name__)
 
 
@@ -26,13 +31,15 @@ def login():
         else:
             flash('Email does not exist.', category='error')
 
-    return render_template("login.html", user=current_user)
+    return render_template('login.html', user=current_user)
+
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
+
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
@@ -42,23 +49,32 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        user = User.query.filter_by(email=email).first()
+        user = sign_up_user_exist(email)
+        # user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
         elif len(email) < 4:
             flash('Email must be greater than 3 character.', category='error')
         elif len(first_name) < 2:
-            flash('First name must be greater than 1 characters.', category="error")
+            flash('First name must be greater than 1 characters.', category='error')
         elif password1 != password2:
-            flash('Password don\'t match.', category="error")
+            flash('Password don\'t match.', category='error')
         elif len(password1) < 7:
-            flash('Password must be at least 7 characters.', category="error")
+            flash('Password must be at least 7 characters.', category='error')
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'))
+            new_user = User(email=email, first_name=first_name,
+                            password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created!', category="success")
+            flash('Account created!', category='success')
             return redirect(url_for('views.home'))
 
-    return render_template("sign_up.html", user=current_user)
+    return render_template('sign_up.html', user=current_user)
+
+
+def sign_up_user_exist(email):
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return "User is already exist"
+    return

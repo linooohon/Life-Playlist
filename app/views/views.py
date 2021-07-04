@@ -4,6 +4,11 @@ from app.model.models import Note
 from app import db
 import json
 
+
+'''
+views 負責 url 對應處理
+'''
+# Make views' Blueprint instance
 views = Blueprint('views', __name__)
 
 
@@ -33,5 +38,5 @@ def deletenote():
         if note.user_id == current_user.id:
             db.session.delete(note)
             db.session.commit()
-    
+
     return jsonify({})
