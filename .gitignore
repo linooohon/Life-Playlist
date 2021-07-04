@@ -1,6 +1,6 @@
 .vscode
 __pycache__
-database.db
+*.db
 venv
 .env
 test_employee.py
