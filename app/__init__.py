@@ -4,9 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from app.config.config import config
-from app.settings import DB_NAME
+from app.settings import choose_db, FLASK_ENV
+# import pymysql
 
 db = SQLAlchemy()
+DB_NAME = choose_db(FLASK_ENV)
 
 
 def create_app(config_name):
@@ -14,7 +16,7 @@ def create_app(config_name):
 
     # 1. 普通直接設置方式
     # app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
-    # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/logintodo_dev'
 
     # print("===========")
     # print(config_name)
@@ -55,6 +57,7 @@ def create_app(config_name):
     return app
 
 
+# 不確定是不是只給 SQLlite 使用
 def create_database(app):
     if not path.exists('website/' + DB_NAME):
         db.create_all(app=app)

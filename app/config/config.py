@@ -1,20 +1,26 @@
 import os
 # import datetime
-from app.settings import SECRET_KEY, DB_NAME
+# import pymysql
+from app.settings import SECRET_KEY, FLASK_ENV, choose_db, MYSQL_CONNECTION_DEV
 
 # 拿當下絕對路徑 -> 在這裡的話也就是 /Users/linpinhung/XXX/login-notes/app/config
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+# 根據 dev pro test 切換 db
+DB_NAME = choose_db(FLASK_ENV)
+
+
 def create_sqlite_uri(db_name):
     return "sqlite:///" + os.path.join(basedir, db_name)
 
-# 基底，共用的
-class BaseConfig(object):
+
+class BaseConfig(object):  # 基底，共用的
     DEBUG = False
     TESTING = False
-    # DATABASE_URI = 'sqlite://:memory:'
 
-#### 以下都繼承 Base 
+# 以下都繼承 Base
+
+
 class ProductionConfig(BaseConfig):
     SECRET_KEY = SECRET_KEY
 
@@ -25,18 +31,20 @@ class ProductionConfig(BaseConfig):
 
 
 class DevelopmentConfig(BaseConfig):
-    ENV = "development"
-    DEBUG = True
     SECRET_KEY = SECRET_KEY
 
+    ENV = "development"
+    DEBUG = True
+
     # Flask-sqlalchemy
-    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://username:password@ip:3306/tablename'
-    SQLALCHEMY_DATABASE_URI = create_sqlite_uri(DB_NAME)
+    SQLALCHEMY_DATABASE_URI = MYSQL_CONNECTION_DEV
+    # SQLALCHEMY_DATABASE_URI = create_sqlite_uri(DB_NAME)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestingConfig(BaseConfig):
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = create_sqlite_uri(DB_NAME)
 
 
 config = {

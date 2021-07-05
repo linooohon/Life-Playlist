@@ -8,6 +8,11 @@ class Note(db.Model):
     data = db.Column(db.String(10000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())  # 拿到當下時間
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # 拿使用者 id 當 fk
+    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # 拿使用者 id 當 fk
+
+    def __init__(self, data, user_id):
+        self.data = data
+        self.user_id = user_id
 
 
 class User(db.Model, UserMixin):
@@ -16,3 +21,9 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
+    # notes = db.relationship('Note', backref='user')
+
+    def __init__(self, email, password, first_name):
+        self.email = email
+        self.password = password
+        self.first_name = first_name

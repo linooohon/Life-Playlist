@@ -1,8 +1,12 @@
 .vscode
-__pycache__
 *.db
-venv
+__pycache__
 .env
+
+venv
+
+# trial
 test_employee.py
 employee.py
 tests_trial
+create_db.py
