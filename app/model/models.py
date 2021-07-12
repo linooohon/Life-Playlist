@@ -9,6 +9,7 @@ class Note(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())  # 拿到當下時間
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # 拿使用者 id 當 fk
     # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # 拿使用者 id 當 fk
+    test_migrate_col = db.Column(db.String(120), nullable=True) #預設就是 nullable=True 可以不寫
 
     def __init__(self, data, user_id):
         self.data = data

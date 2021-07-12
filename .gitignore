@@ -1,5 +1,6 @@
 .vscode
 *.db
+*.pem
 __pycache__
 .env
 

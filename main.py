@@ -1,8 +1,11 @@
 import os
-from app import create_app
+from app import create_app, db
 from app.settings import FLASK_ENV
+from flask_migrate import Migrate
+
 
 app = create_app(FLASK_ENV)
+migrates = Migrate(app=app, db=db)
 
 @app.cli.command()
 def test():

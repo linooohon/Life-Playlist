@@ -1,11 +1,11 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
 from os import path
 from flask_login import LoginManager
 from app.config.config import config
 from app.settings import choose_db, FLASK_ENV
-# import pymysql
 
 db = SQLAlchemy()
 DB_NAME = choose_db(FLASK_ENV)
@@ -37,7 +37,7 @@ def create_app(config_name):
 
     from app.model.models import User, Note
 
-    create_database(app)
+    # create_database(app)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
@@ -58,7 +58,7 @@ def create_app(config_name):
 
 
 # 不確定是不是只給 SQLlite 使用
-def create_database(app):
-    if not path.exists('website/' + DB_NAME):
-        db.create_all(app=app)
-        print('Created Database!')
+# def create_database(app):
+#     if not path.exists('website/' + DB_NAME):
+#         db.create_all(app=app)
+#         print('Created Database!')
