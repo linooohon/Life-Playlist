@@ -1,7 +1,11 @@
 import os
 # import datetime
 # import pymysql
-from app.settings import SECRET_KEY, FLASK_ENV, choose_db, MYSQL_CONNECTION_DEV, POSTGRESQL_CONNECTION_PRO
+from app.settings import (
+    SECRET_KEY, FLASK_ENV, choose_db, 
+    MYSQL_CONNECTION_DEV, POSTGRESQL_CONNECTION_PRO,
+    POSTGRESQL_CONNECTION_DEV_DOCKER
+    )
 
 # 拿當下絕對路徑 -> 在這裡的話也就是 /Users/linpinhung/XXX/login-notes/app/config
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -42,6 +46,17 @@ class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
+class DockerDevelopmentConfig(BaseConfig):
+    SECRET_KEY = SECRET_KEY
+
+    ENV = "development"
+    DEBUG = True
+
+    # Flask-sqlalchemy
+    SQLALCHEMY_DATABASE_URI = POSTGRESQL_CONNECTION_DEV_DOCKER
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
 class TestingConfig(BaseConfig):
     SECRET_KEY = SECRET_KEY
     ENV = "development"
@@ -56,4 +71,5 @@ config = {
     "development": DevelopmentConfig,
     "testing": TestingConfig,
     "default": DevelopmentConfig,
+    "development_docker": DockerDevelopmentConfig,
 }

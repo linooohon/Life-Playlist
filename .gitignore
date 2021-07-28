@@ -1,13 +1,18 @@
 .vscode
 *.db
-*.pem
 __pycache__
 .env
 
 venv
+
+# aws linux
+*.pem
 
 # trial
 test_employee.py
 employee.py
 tests_trial
 create_db.py
+
+# docker volume
+postgres-data

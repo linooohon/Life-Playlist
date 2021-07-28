@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres
+    container_name: postgres_todo
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    environment: 
+      POSTGRES_DB: logintododb_container_pg
+      POSTGRES_USER: linpinhung
+      POSTGRES_PASSWORD: linpinhung
+    ports:
+      - "5434:5432"
+
+
+  flask:
+    build: 
+      context: .
+      dockerfile: flask.Dockerfile
+    container_name: flask_todo
+    restart: always
+    volumes:
+      - .:/app
+    environment:
+      - APP_NAME=FlaskApp
+    expose:
+      - 8080
+    depends_on:
+      - db 
+
+
+  nginx:
+    build: 
+      context: .
+      dockerfile: nginx.Dockerfile
+    container_name: nginx_todo
+    # restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - flask
