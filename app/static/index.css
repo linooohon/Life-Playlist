@@ -1,0 +1,30 @@
+h1 {
+    color: #094d3c;
+}
+
+html, body {
+    background-color:rgb(232, 199, 185);
+}
+
+#navbar {
+    /* background-color:rgb(232, 199, 185); */
+}
+
+#artist {
+    color: #ffffff;
+    background-color: rgb(130, 127, 127);
+}
+
+#addsong__button {
+    background-color: transparent;
+    border-radius: 5%;
+    border: 1px solid #c49292;
+}
+
+#addsong__button:hover{
+    background-color: transparent;
+    border-radius: 5%;
+    border: 1px solid #c49292;
+    color: #094d3c;
+    transition: 0.5s;
+}

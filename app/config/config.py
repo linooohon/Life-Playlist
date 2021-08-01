@@ -7,7 +7,7 @@ from app.settings import (
     POSTGRESQL_CONNECTION_DEV_DOCKER
     )
 
-# 拿當下絕對路徑 -> 在這裡的話也就是 /Users/linpinhung/XXX/login-notes/app/config
+# 拿當下絕對路徑 -> 在這裡的話也就是 /Users/linpinhung/XXX/life-playlist/app/config
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # 根據 dev pro test 切換 db
@@ -44,6 +44,10 @@ class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = MYSQL_CONNECTION_DEV
     # SQLALCHEMY_DATABASE_URI = create_sqlite_uri(DB_NAME)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    CACHE_TYPE = 'simple'
+    # CACHE_REDIS_HOST = '127.0.0.1'
+    # CACHE_REDIS_PORT = 6379
 
 
 class DockerDevelopmentConfig(BaseConfig):
