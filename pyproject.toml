@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "personal_notes"
+name = "The last playlist"
 version = "0.1.0"
-description = "login, and create your own to-do notes"
+description = "Make the playlist of your life."
 authors = ["linooohon <linooohon@gmail.com>"]
 
 [tool.poetry.dependencies]

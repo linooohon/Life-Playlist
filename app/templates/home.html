@@ -2,22 +2,29 @@
 
 
 {% block content %}
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
-    {% for note in user.notes %}
+<h1 align="center">Playlist of your life</h1>
+<ul class="list-group list-group-flush" id="playlists">
+    {% for artistAndSong in user.playlists %}
     <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+        {{ artistAndSong.artist }} - {{ artistAndSong.song }}
+        <button type="button" class="close" onClick="deletePlaylistItem({{ artistAndSong.id }})">
             <span aria-hidden="true">&times;</span>
         </button>
     </li>
     {% endfor %}
 </ul>
+<br />
 <form method="POST">
-    <textarea name="note" id="note" class="form-control"></textarea>
+    <p>Artist's name:</p>
+    <textarea name="artist" id="artist" class="form-control"></textarea>
     <br />
+    <p>Song's name:</p>
+    <textarea name="song" id="song" class="form-control"></textarea>
     <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
+        <button type="submit" class="btn btn-primary" id="addsong__button">Add your love song</button>
     </div>
 </form>
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 {% endblock %}

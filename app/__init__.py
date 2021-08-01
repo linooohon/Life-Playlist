@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_caching import Cache
 
 from os import path
 from flask_login import LoginManager
@@ -8,6 +9,7 @@ from app.config.config import config
 from app.settings import choose_db, FLASK_ENV
 
 db = SQLAlchemy()
+cache = Cache()
 DB_NAME = choose_db(FLASK_ENV)
 
 
@@ -27,6 +29,7 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
 
     db.init_app(app)
+    cache.init_app(app)
 
     from app.views.views import views
     from app.views.auth import auth
@@ -35,7 +38,7 @@ def create_app(config_name):
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    from app.model.models import User, Note
+    from app.model.models import User, Playlist
 
     # create_database(app)
 

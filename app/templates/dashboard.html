@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %}
+
+
+{% block content %}
+<h1 align="center">Dashboard</h1>
+<ul class="list-group list-group-flush" id="playlists">
+    {% for artist_and_song in playlists %}
+    <li class="list-group-item">
+        {{ artist_and_song.artist }} - {{ artist_and_song.song }}
+    </li>
+    {% endfor %}
+</ul>
+<!-- <form method="POST">
+    <textarea name="artist" id="artist" class="form-control"></textarea>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add Song</button>
+    </div>
+</form> -->
+
+
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> -->
+{% endblock %}
