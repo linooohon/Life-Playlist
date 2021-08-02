@@ -9,3 +9,18 @@
 - 人生歌單限定只能新增 10 首，如果有人的人生歌單, 與另一個人有 3 首一樣，就會推薦彼此的個人 email 和 名字給對方。
 
 -->
+
+## 1. Reason:
+## 2. Tools:
+##### Web Server:
+- uWSGI
+- Nginx
+##### Testing:
+- Unittest
+##### Flask:
+- Flask_Login
+- Flask_Migrate
+- Flask_SQLAlchemy
+- Flask_Caching
+##### Spotify:
+- spotipy
