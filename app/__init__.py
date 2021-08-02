@@ -1,10 +1,11 @@
 import os
+from os import path
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
-
-from os import path
 from flask_login import LoginManager
+
+
 from app.config.config import config
 from app.settings import choose_db, FLASK_ENV
 

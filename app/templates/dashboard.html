@@ -2,14 +2,20 @@
 
 
 {% block content %}
-<h1 align="center">Dashboard</h1>
-<ul class="list-group list-group-flush" id="playlists">
-    {% for artist_and_song in playlists %}
-    <li class="list-group-item">
-        {{ artist_and_song.artist }} - {{ artist_and_song.song }}
-    </li>
-    {% endfor %}
-</ul>
+<h1 align="center">Top 10 Dashboard</h1>
+<div class="dashboard-div">
+    <ul class="list-group list-group-flush dashboard-ul" id="playlists">
+        {% for artist_and_song in playlists %}
+        <li class="list-group-item dashboard-li">
+            {{ artist_and_song.artist }} - {{ artist_and_song.song }}
+            <a href="{{ artist_and_song.uri }}" class="dashboard-a"><i class="fab fa-spotify"></i>Listen now</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<!-- {% for uri in spotify_artistpage %}
+<a href="{{ uri }}">link</a>
+{% endfor %} -->
 <!-- <form method="POST">
     <textarea name="artist" id="artist" class="form-control"></textarea>
     <br />
@@ -19,5 +25,5 @@
 </form> -->
 
 
-<!-- <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> -->
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 {% endblock %}

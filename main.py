@@ -1,8 +1,9 @@
 import os
+from flask_migrate import Migrate
+# from flask_script import Manager
+
 from app import create_app, db
 from app.settings import FLASK_ENV
-# from flask_script import Manager
-from flask_migrate import Migrate
 
 
 app = create_app(FLASK_ENV)

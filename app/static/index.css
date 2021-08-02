@@ -1,9 +1,12 @@
 h1 {
+    padding-top: 3rem;
     color: #094d3c;
+    font-weight: 700;
 }
 
 html, body {
     background-color:rgb(232, 199, 185);
+    font-family: 'Ubuntu Mono', monospace;
 }
 
 #navbar {
@@ -27,4 +30,33 @@ html, body {
     border: 1px solid #c49292;
     color: #094d3c;
     transition: 0.5s;
+}
+
+.dashboard-div {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-ul {
+    width: 700px;
+}
+
+.dashboard-li {
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 1px;
+}
+
+.dashboard-a {
+    color: #72d8bf;
+}
+
+.dashboard-a i{
+    padding: 0.1rem 0.4rem 0 0;
+}
+
+.dashboard-a:hover {
+    text-decoration: none;
 }

@@ -1,9 +1,16 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
-from app.model.models import Playlist
-from app import db, cache
 import json
 import collections
+
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
+from app.model.models import Playlist
+from app import db, cache
+from app.settings import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+
+
 
 
 '''
@@ -57,6 +64,19 @@ def delete_playlist_item():
 @views.route('/dashboard', methods=['GET'])
 def dashboard():
     all_playlist = Playlist.query.all()
+    # for idx, track in enumerate(r['tracks']['items']):
+    #     print(idx, track['name'], track['uri']) # uri 可以開啟 spotify 播到那首歌
+
+    # lz_uri = 'spotify:artist:36QJpDe2go2KgaRleHCDTp'
+    # results = sp.artist_top_tracks(lz_uri)
+    # for track in results['tracks'][:10]:
+    #     print('track    : ' + track['name'])
+    #     print('audio    : ' + track['preview_url'])  #這個可以聽30秒
+    #     print('cover art: ' + track['album']['images'][0]['url'])
+    #     print()
+    # results = sp.search(q='weezer', limit=20)
+    # print(results)
+
     count_songs_preset_list = []
     dashboard_top10_list = []
     for i in all_playlist:
@@ -84,7 +104,17 @@ def dashboard():
             final_lower_list.append(
                 ''.join((i.artist + i.song).lower().strip().split()))
             final_list.append(i)
-    print(len(final_list))
+
+    sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
+        client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET))
+    
+    # spotify_artistpage = []
     for i in final_list:
-        print(i.artist + i.song)
+        r = sp.search(q=i.artist, limit=3, type='artist')
+        id = r['artists']['items'][0]['id']
+        uri = f"spotify:artist:{id}"
+        i.uri = uri
+        # spotify_artistpage.append(uri)
+        print(r['artists']['items'][0]['id'])
+
     return render_template("dashboard.html", playlists=final_list, user=current_user)

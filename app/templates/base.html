@@ -12,7 +12,19 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>{% block title %}Home{% endblock %}</title>
+
+    <!--personal-->
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+    <!--google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -37,23 +49,23 @@
 
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-        {% for category, message in messages %}
-        {% if category == 'error' %}
-        <div class="alert alert-danger alter-dismissable fade show" role="alert">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% else %}
-        <div class="alert alert-success alter-dismissable fade show" role="alert">
-            {{ message }}
-            <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endif %}
-        {% endfor %}
+    {% for category, message in messages %}
+    {% if category == 'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    {% endfor %}
     {% endif %}
     {% endwith %}
 

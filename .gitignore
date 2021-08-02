@@ -16,3 +16,6 @@ create_db.py
 
 # docker volume
 postgres-data
+
+#spotify
+.cache
