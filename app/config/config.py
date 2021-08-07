@@ -6,7 +6,8 @@ from app.settings import (
     SECRET_KEY, FLASK_ENV, choose_db, 
     MYSQL_CONNECTION_DEV, POSTGRESQL_CONNECTION_PRO,
     POSTGRESQL_CONNECTION_DEV_DOCKER, MAIL_USERNAME, 
-    MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USE_SSL
+    MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USE_SSL,
+    MAIL_DEFAULT_SENDER
     )
 
 # 拿當下絕對路徑 -> 在這裡的話也就是 /Users/linpinhung/XXX/life-playlist/app/config
@@ -55,6 +56,7 @@ class DevelopmentConfig(BaseConfig):
     MAIL_PORT = MAIL_PORT
     MAIL_SERVER = MAIL_SERVER
     MAIL_USE_SSL = MAIL_USE_SSL
+    MAIL_DEFAULT_SENDER = MAIL_DEFAULT_SENDER
 
 
 
@@ -64,10 +66,18 @@ class DockerDevelopmentConfig(BaseConfig):
 
     ENV = "development"
     DEBUG = True
+    
+    CACHE_TYPE = 'simple'
 
     # Flask-sqlalchemy
     SQLALCHEMY_DATABASE_URI = POSTGRESQL_CONNECTION_DEV_DOCKER
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    MAIL_USERNAME = MAIL_USERNAME
+    MAIL_PASSWORD = MAIL_PASSWORD
+    MAIL_PORT = MAIL_PORT
+    MAIL_SERVER = MAIL_SERVER
+    MAIL_USE_SSL = MAIL_USE_SSL
+    MAIL_DEFAULT_SENDER = MAIL_DEFAULT_SENDER
 
 
 class TestingConfig(BaseConfig):

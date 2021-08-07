@@ -15,7 +15,7 @@ tests_trial
 create_db.py
 
 # docker volume
-postgres-data
+postgres-lifeplaylist-data
 
 #spotify
 .cache

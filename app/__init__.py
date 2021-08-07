@@ -6,14 +6,19 @@ from flask_caching import Cache
 from flask_login import LoginManager
 from flask_mail import Mail
 
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+from youtubesearchpython import VideosSearch
 
 from app.config.config import config
-from app.settings import choose_db, FLASK_ENV
+from app.settings import choose_db, FLASK_ENV, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
 
 db = SQLAlchemy()
 cache = Cache()
 mail = Mail()
 DB_NAME = choose_db(FLASK_ENV)
+sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
+    client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET))
 
 
 def create_app(config_name):
@@ -21,12 +26,7 @@ def create_app(config_name):
 
     # 1. 普通直接設置方式
     # app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/logintodo_dev'
-
-    # print("===========")
-    # print(config_name)
-    # print(DB_NAME)
-    # print("===========")
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/lifeplaylist_dev'
 
     # 2. 採用 config.py 設置，多了架構，擴充性
     app.config.from_object(config[config_name])
@@ -42,7 +42,7 @@ def create_app(config_name):
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    from app.model.models import User, Playlist
+    from app.model.models import User, Playlist, Dashboard
 
     # create_database(app)
 

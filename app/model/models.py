@@ -32,3 +32,17 @@ class User(db.Model, UserMixin):
         self.email = email
         self.password = password
         self.first_name = first_name
+
+
+class Dashboard(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    dashboard_artist = db.Column(db.String(500))
+    dashboard_song = db.Column(db.String(500))
+    artist_spotify_uri = db.Column(db.String(500))
+    song_youtube_url = db.Column(db.String(500))
+
+    def __init__(self, dashboard_artist, dashboard_song, artist_spotify_uri, song_youtube_url):
+        self.dashboard_artist = dashboard_artist
+        self.dashboard_song = dashboard_song
+        self.artist_spotify_uri = artist_spotify_uri
+        self.song_youtube_url = song_youtube_url

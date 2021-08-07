@@ -1,12 +1,12 @@
 services:
   db:
     image: postgres
-    container_name: postgres_todo
+    container_name: postgres_lifeplaylist
     restart: always
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - ./postgres-lifeplaylist-data:/var/lib/postgresql/data
     environment: 
-      POSTGRES_DB: logintododb_container_pg
+      POSTGRES_DB: postgres_flask_lifeplaylist
       POSTGRES_USER: linpinhung
       POSTGRES_PASSWORD: linpinhung
     ports:
@@ -17,12 +17,14 @@ services:
     build: 
       context: .
       dockerfile: flask.Dockerfile
-    container_name: flask_todo
+    container_name: flask_lifeplaylist
     restart: always
     volumes:
       - .:/app
     environment:
       - APP_NAME=FlaskApp
+      # - FLASK_DEBUG='on'
+      # - FLASK_APP=./app.py
     expose:
       - 8080
     depends_on:
@@ -33,8 +35,8 @@ services:
     build: 
       context: .
       dockerfile: nginx.Dockerfile
-    container_name: nginx_todo
-    # restart: always
+    container_name: nginx_lifeplaylist
+    restart: always
     ports:
       - "80:80"
     depends_on:

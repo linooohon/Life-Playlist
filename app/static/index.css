@@ -54,8 +54,19 @@ html, body {
     letter-spacing: 1px;
 }
 
-.dashboard-a {
+.dashboard-li .spotify_and_youtube {
+    @media (max-width: 767px) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.spotify {
     color: #72d8bf;
+}
+
+.youtube {
+    color: #e79191;
 }
 
 .dashboard-a i{
@@ -64,4 +75,16 @@ html, body {
 
 .dashboard-a:hover {
     text-decoration: none;
+}
+
+
+@media (max-width: 767px) {
+    .dashboard-li {
+        flex-direction: column;
+    }
+
+    .dashboard-li .spotify_and_youtube {
+        display: flex;
+        justify-content: space-between;
+    }   
 }
