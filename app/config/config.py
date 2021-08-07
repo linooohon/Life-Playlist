@@ -5,7 +5,8 @@ import os
 from app.settings import (
     SECRET_KEY, FLASK_ENV, choose_db, 
     MYSQL_CONNECTION_DEV, POSTGRESQL_CONNECTION_PRO,
-    POSTGRESQL_CONNECTION_DEV_DOCKER
+    POSTGRESQL_CONNECTION_DEV_DOCKER, MAIL_USERNAME, 
+    MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USE_SSL
     )
 
 # 拿當下絕對路徑 -> 在這裡的話也就是 /Users/linpinhung/XXX/life-playlist/app/config
@@ -49,6 +50,13 @@ class DevelopmentConfig(BaseConfig):
     CACHE_TYPE = 'simple'
     # CACHE_REDIS_HOST = '127.0.0.1'
     # CACHE_REDIS_PORT = 6379
+    MAIL_USERNAME = MAIL_USERNAME
+    MAIL_PASSWORD = MAIL_PASSWORD
+    MAIL_PORT = MAIL_PORT
+    MAIL_SERVER = MAIL_SERVER
+    MAIL_USE_SSL = MAIL_USE_SSL
+
+
 
 
 class DockerDevelopmentConfig(BaseConfig):

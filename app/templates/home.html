@@ -25,6 +25,11 @@
     </div>
 </form>
 
+{% if messages %}
+{% else %}
+{% endif %}
+
+
 
 <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 {% endblock %}

@@ -15,13 +15,18 @@ html, body {
 
 #artist {
     color: #ffffff;
-    background-color: rgb(130, 127, 127);
+    background-color: rgb(159, 157, 157);
+}
+
+#song {
+    background-color: rgb(126, 123, 123);
 }
 
 #addsong__button {
     background-color: transparent;
     border-radius: 5%;
     border: 1px solid #c49292;
+    margin-top: 2rem;
 }
 
 #addsong__button:hover{

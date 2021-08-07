@@ -4,6 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
 from flask_login import LoginManager
+from flask_mail import Mail
 
 
 from app.config.config import config
@@ -11,6 +12,7 @@ from app.settings import choose_db, FLASK_ENV
 
 db = SQLAlchemy()
 cache = Cache()
+mail = Mail()
 DB_NAME = choose_db(FLASK_ENV)
 
 
@@ -31,6 +33,7 @@ def create_app(config_name):
 
     db.init_app(app)
     cache.init_app(app)
+    mail.init_app(app)
 
     from app.views.views import views
     from app.views.auth import auth
