@@ -9,13 +9,27 @@ venv
 *.pem
 
 # trial
+_testingfolder/
 test_employee.py
 employee.py
 tests_trial
 create_db.py
+trial_test.py
 
 # docker volume
 postgres-lifeplaylist-data
 
 #spotify
 .cache
+spotify_api.txt
+spotify-api-2.png
+spotify-api.png
+
+
+# google account
+life-playlist-google-account.png
+
+
+# coverage folder, file/ test
+.coverage
+htmlcov/
