@@ -91,7 +91,7 @@ def check_same_song_lover():
                     and db_artistsong_lowerstrip not in duplicate_filter_list:
                 duplicate_filter_list.append(db_artistsong_lowerstrip)
                 samesong_list.append(db_artistsong_lowerstrip)
-                if len(samesong_list) >= 3:
+                if len(samesong_list) >= 1:
                     # print(i.id)
                     # print(i.email)
                     your_soulmate_email = i.email

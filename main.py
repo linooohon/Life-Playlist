@@ -2,6 +2,8 @@ import sys
 import atexit
 import unittest
 from apscheduler.schedulers.background import BackgroundScheduler
+import os
+from werkzeug.serving import is_running_from_reloader
 
 from flask_migrate import Migrate
 
@@ -13,6 +15,7 @@ from app.helpers.updatedashboard_helper import fetch_spotify_youtube
 app = create_app(FLASK_ENV)
 migrates = Migrate(app=app, db=db)
 
+
 @app.cli.command()
 def test():
     # Test Case -> every text_xx method, 一個 method 就是一個 test case
@@ -21,19 +24,25 @@ def test():
     # Text Test Runner -> 執行 run ， 測試結果存在 Texttestresult
     # 把 tests 資料夾裡的 test_xx.py 裡的 text_xx 方法
     tests = unittest.TestLoader().discover("tests")
-    result = unittest.TextTestRunner(verbosity=2).run(tests)    #verbosity=2 列印測試訊息更詳細
-    if result.errors or result.failures:   #處理錯誤
-        sys.exit(1)   #(0) 無錯誤退出 (1)有錯誤退出，1 告知這個程序是捕獲到異常，是非正常退出
+    result = unittest.TextTestRunner(verbosity=2).run(
+        tests)  # verbosity=2 列印測試訊息更詳細
+    if result.errors or result.failures:  # 處理錯誤
+        sys.exit(1)  # (0) 無錯誤退出 (1)有錯誤退出，1 告知這個程序是捕獲到異常，是非正常退出
 
 
+#  Prevent call this function twice in Flask -> https: // stackoverflow.com/questions/25504149/why-does-running-the-flask-dev-server-run-itself-twice/25504196
 def dashboard_background_update():
     with app.app_context():
-        fetch_spotify_youtube()
-    
-# https://apscheduler.readthedocs.io/en/stable/modules/triggers/interval.html?highlight=days
+        if is_running_from_reloader():   # Prevent call this function twice
+            fetch_spotify_youtube()
+
+
+# if not app.debug or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+    # https://apscheduler.readthedocs.io/en/stable/modules/triggers/interval.html?highlight=days
+
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=dashboard_background_update,
-                  trigger="interval", seconds=10)
+                  trigger="interval", minutes=5)
 scheduler.start()
 
 # Shut down the scheduler when exiting the app
