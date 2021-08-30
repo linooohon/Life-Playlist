@@ -183,3 +183,7 @@ life-playlist-google-account.png
 # coverage folder, file/ test
 .coverage
 htmlcov/
+
+
+
+migrations/
