@@ -1,9 +1,13 @@
 import sys
 import collections
+from threading import current_thread
 import time
 from app import db, sp
 from app.model.models import Playlist, Dashboard
 from youtubesearchpython import VideosSearch
+# import subprocess
+from datetime import datetime
+import logging
 
 
 def search_on_youtube(artist_and_song):
@@ -39,6 +43,8 @@ def search_on_spotify(artist):
 
 
 def fetch_spotify_youtube():
+    logging.basicConfig(
+        filename="dashboard_update.log", level=logging.INFO)
     print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
     print('call spotify and youtube api')
     try:
@@ -98,6 +104,10 @@ def fetch_spotify_youtube():
             db.session.add(new_top10_data)
             db.session.commit()
         print("update to db success")
+        current_time = str(datetime.now())
+        logging.info(f"SUCCESS, fetch spotify and youtube api, finished updated dashboard -> time: {current_time}")
     except:
+        logging.info(
+            f"FAIL, fetch spotify and youtube api, updating dashboard have some problem -> time: {current_time}")
         print("Unexpected error when execute spotify youtube api:",
               sys.exc_info()[0])
