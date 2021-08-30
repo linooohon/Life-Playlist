@@ -46,7 +46,7 @@ scheduler.add_job(func=dashboard_background_update,
 scheduler.start()
 
 # Shut down the scheduler when exiting the app
-atexit.register(lambda: scheduler.shutdown())
+# atexit.register(lambda: scheduler.shutdown())
 
 
 if __name__ == '__main__':
