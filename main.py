@@ -33,8 +33,8 @@ def test():
 #  Prevent call this function twice in Flask -> https: // stackoverflow.com/questions/25504149/why-does-running-the-flask-dev-server-run-itself-twice/25504196
 def dashboard_background_update():
     with app.app_context():
-        if is_running_from_reloader():   # Prevent call this function twice
-            fetch_spotify_youtube()
+        # if is_running_from_reloader():   # Prevent call this function twice
+        fetch_spotify_youtube()
 
 
 # if not app.debug or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
@@ -42,7 +42,7 @@ def dashboard_background_update():
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=dashboard_background_update,
-                  trigger="interval", minutes=5)
+                  trigger="interval", minutes=1)
 scheduler.start()
 
 # Shut down the scheduler when exiting the app
@@ -51,3 +51,4 @@ atexit.register(lambda: scheduler.shutdown())
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
+    # app.run(debug=True)

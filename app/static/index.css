@@ -9,6 +9,31 @@ html, body {
     font-family: 'Ubuntu Mono', monospace;
 }
 
+input:focus {
+    outline: none;
+}
+
+
+#signuplogin__buttondiv {
+    display: flex;
+    justify-content: center;
+}
+
+#signup_login_button {
+    background-color: #cba1a1;
+    border-radius: 5%;
+    border: 2px solid #ebeaea;
+    margin-top: 2rem;
+}
+
+
+#signup_login_button:hover {
+    background-color: #f7afaf;
+    border-radius: 5%;
+    border: 2px solid #edecec;
+    margin-top: 2rem;
+}
+
 #navbar {
     /* background-color:rgb(232, 199, 185); */
 }
