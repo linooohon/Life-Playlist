@@ -42,7 +42,7 @@ def dashboard_background_update():
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(func=dashboard_background_update,
-                  trigger="interval", seconds=20)
+                  trigger="interval", days=1)
 scheduler.start()
 
 # Shut down the scheduler when exiting the app
