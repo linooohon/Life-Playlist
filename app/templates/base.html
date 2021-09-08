@@ -35,13 +35,15 @@
         <div class="collapse navbar-collapse" id="navbar">
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                <a class="nav-item nav-link" id="home" href="/">My Life Playlist</a>
-                <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-                <a class="nav-item nav-link" id="dashboard" href="/dashboard">Dashboard</a>
+                <a class="custom-menu-nav-item nav-item nav-link" id="home" href="/">My Life Playlist</a>
+                <a class="custom-menu-nav-item nav-item nav-link" id="dashboard" href="/dashboard">Dashboard</a>
+                <a class="custom-menu-nav-item nav-item nav-link" id="intro" href="/intro">Intro</a>
+                <a class="custom-menu-nav-item nav-item nav-link" id="logout" href="/logout">Logout</a>
                 {% else %}
-                <a class="nav-item nav-link" id="login" href="/login">Login</a>
-                <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-                <a class="nav-item nav-link" id="dashboard" href="/dashboard">Dashboard</a>
+                <a class="custom-menu-nav-item nav-item nav-link" id="dashboard" href="/dashboard">Dashboard</a>
+                <a class="custom-menu-nav-item nav-item nav-link" id="intro" href="/intro">Intro</a>
+                <a class="custom-menu-nav-item nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+                <a class="custom-menu-nav-item nav-item nav-link" id="login" href="/login">Login</a>
                 {% endif %}
             </div>
         </div>

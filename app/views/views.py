@@ -111,3 +111,8 @@ def send_mail(current_user_email, soulmate_email, soulmate_firstname):
         'soulmate_mail.html', soulmate_email=soulmate_email, soulmate_firstname=soulmate_firstname)
     mail.send(msg)
     return 'You Send Mail by Flask-Mail Success!!'
+
+
+@views.route('/intro', methods=['GET'])
+def intro():
+    return render_template("intro.html", user=current_user)

@@ -47,7 +47,8 @@ def create_app(config_name):
     # create_database(app)
 
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = 'views.intro'
+    login_manager.login_message = "Create your Life Playlist, cause music is always important.🥶"
     login_manager.init_app(app)
 
     @login_manager.user_loader
