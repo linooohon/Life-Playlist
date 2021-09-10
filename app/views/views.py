@@ -102,6 +102,7 @@ def check_same_song_lover():
 
 # email setting for sending soulemate's email to user
 def send_mail(current_user_email, soulmate_email, soulmate_firstname):
+    print("start to sent email")
     msg_title = 'Talk to your life playlist soulmate'
     msg_recipients = [current_user_email]
     # msg_body = f"your life playlist soulmate's email is {soulmate_email}"
