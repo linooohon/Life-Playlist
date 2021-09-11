@@ -46,3 +46,15 @@ class Dashboard(db.Model):
         self.dashboard_song = dashboard_song
         self.artist_spotify_uri = artist_spotify_uri
         self.song_youtube_url = song_youtube_url
+
+
+class Soulmate_Record(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    original_email = db.Column(db.String(500))
+    soulmate_email = db.Column(db.String(500))
+    same_song = db.Column(db.String(500))
+
+    def __init__(self, original_email, soulmate_email, same_song):
+        self.original_email = original_email
+        self.soulmate_email = soulmate_email
+        self.same_song = same_song

@@ -1,16 +1,15 @@
-# from logging import raiseExceptions
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from flask_mail import Mail, Message
-# from threading import Thread
 import json
-import sendgrid
-from sendgrid.helpers.mail import *
+# from threading import Thread
+# import sendgrid
+# from sendgrid.helpers.mail import *
+# from logging import raiseExceptions
 
-
-from app.model.models import Playlist, User, Dashboard
-from app import db, cache, mail, sp
-from app.settings import MAIL_USERNAME, MAIL_USERNAME, SENDGRID_API_KEY, MAIL_DEFAULT_SENDER
+from app.model.models import Playlist, Dashboard
+from app import db, cache
+# from app.settings import MAIL_USERNAME
 
 
 '''
@@ -25,8 +24,6 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     print("/ GET 沒走 cache")
-    check_same_song_lover()
-    # fetch_spotify_youtube()
     if request.method == 'POST':
 
         artist = request.form.get('artist')
@@ -67,74 +64,6 @@ def delete_playlist_item():
 def dashboard():
     dashboard_data = Dashboard.query.all()
     return render_template("dashboard.html", dashboard_data=dashboard_data, user=current_user)
-
-
-def check_same_song_lover():
-    current_artistsong_lowerstrip_list = []
-    duplicate_filter_list = []
-    samesong_list = []
-    all_user = User.query.all()
-
-    # 找出 current user 的 playlist to lower, strip, split
-    for i in current_user.playlists:
-        current_artistsong = i.__dict__['artist'] + i.__dict__['song']
-        current_artistsong_lowerstrip = ''.join(
-            current_artistsong.lower().strip().split())
-        current_artistsong_lowerstrip_list.append(
-            current_artistsong_lowerstrip)
-
-    # 從 db 找全部 playlist 看有沒有歌出現在現在這個 user 的 playlist
-    for i in all_user:
-        for j in i.playlists:
-            db_artistsong = j.__dict__['artist'] + j.__dict__['song']
-            db_artistsong_lowerstrip = ''.join(
-                db_artistsong.lower().strip().split())
-            if db_artistsong_lowerstrip in current_artistsong_lowerstrip_list and i.id is not current_user.id \
-                    and db_artistsong_lowerstrip not in duplicate_filter_list:
-                duplicate_filter_list.append(db_artistsong_lowerstrip)
-                samesong_list.append(db_artistsong_lowerstrip)
-                if len(samesong_list) >= 1:
-                    # print(i.id)
-                    # print(i.email)
-                    your_soulmate_email = i.email
-                    your_soulmate_firstname = i.first_name
-                    send_mail(current_user.email, your_soulmate_email,
-                              your_soulmate_firstname)
-
-
-# email setting for sending soulemate's email to user
-def send_mail(current_user_email, soulmate_email, soulmate_firstname):
-    print("start to sent email")
-    msg_title = 'Talk to your life playlist soulmate'
-    msg_recipients = [current_user_email]
-    # msg_body = f"your life playlist soulmate's email is {soulmate_email}"
-    msg = Message(msg_title, sender=MAIL_DEFAULT_SENDER, recipients=msg_recipients)
-    # msg.body = msg_body
-    msg.html = render_template(
-        'soulmate_mail.html', soulmate_email=soulmate_email, soulmate_firstname=soulmate_firstname)
-    mail.send(msg)
-
-    # sg = sendgrid.SendGridClient(SENDGRID_API_KEY)
-    # message = sendgrid.Mail()
-
-    # message.add_to("linooohon@gmail.com")
-    # message.set_from("lifeplaylistsmtp@gmail.com")
-    # message.set_subject("Sending with SendGrid is Fun")
-    # message.set_html("and easy to do anywhere, even with Python")
-    # sg.send(message)
-
-    # sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
-    # from_email = Email("lifeplaylistsmtp@gmail.com")
-    # to_email = To("linooohon@gmail.com")
-    # subject = "Sending with SendGrid is Fun"
-    # content = Content("text/html", "123")
-    # mail = Mail(from_email, to_email, subject, content)
-    # response = sg.client.mail.send.post(request_body=mail.get())
-    # print(response.status_code)
-    # print(response.body)
-    # print(response.headers)
-
-    return 'You Send Mail by Flask-Mail Success!!'
 
 
 @views.route('/intro', methods=['GET'])

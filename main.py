@@ -10,6 +10,7 @@ from flask_migrate import Migrate
 from app import create_app, db
 from app.settings import FLASK_ENV
 from app.helpers.updatedashboard_helper import fetch_spotify_youtube
+from app.helpers.sendsoulmate_helper import check_same_song_lover
 
 
 app = create_app(FLASK_ENV)
@@ -36,14 +37,24 @@ def dashboard_background_update():
         # if is_running_from_reloader():   # Prevent call this function twice
         fetch_spotify_youtube()
 
+def soulmate_email_sending():
+    with app.app_context():
+        check_same_song_lover()
+
 
 # if not app.debug or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
     # https://apscheduler.readthedocs.io/en/stable/modules/triggers/interval.html?highlight=days
 
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=dashboard_background_update,
-                  trigger="interval", days=1)
-scheduler.start()
+dashboard_scheduler = BackgroundScheduler()
+dashboard_scheduler.add_job(func=dashboard_background_update,
+                            trigger="interval", days=1)
+dashboard_scheduler.start()
+
+
+email_sending_scheduler = BackgroundScheduler()
+email_sending_scheduler.add_job(func=soulmate_email_sending,
+                  trigger="interval", seconds=30)
+email_sending_scheduler.start()
 
 # Shut down the scheduler when exiting the app
 # atexit.register(lambda: scheduler.shutdown())
