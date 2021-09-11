@@ -13,7 +13,11 @@ MAIL_USERNAME = os.getenv('MAIL_USERNAME')
 MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
 MAIL_SERVER = os.getenv('MAIL_SERVER')
 MAIL_PORT = os.getenv('MAIL_PORT')
-# MAIL_USE_SSL = os.getenv('MAIL_USE_SSL')
+
+# 如果是使用 flask-mail 但是使用 sengrid server 的話 -> "smtp.sendgrid.net", 那必需使用 TLS 而不是 SSL
+# 目前在 Google Compute Engine 裡發信是使用 sengrid ! 所以 .env 目前是沒有設置 MAIL_USE_SSL 的
+MAIL_USE_SSL = os.getenv('MAIL_USE_SSL') 
+
 MAIL_USE_TLS = os.getenv('MAIL_USE_TLS')
 MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
 
