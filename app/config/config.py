@@ -7,7 +7,7 @@ from app.settings import (
     MYSQL_CONNECTION_DEV, POSTGRESQL_CONNECTION_PRO,
     POSTGRESQL_CONNECTION_DEV_DOCKER, MAIL_USERNAME, 
     MAIL_PASSWORD, MAIL_PORT, MAIL_SERVER, MAIL_USE_SSL,
-    MAIL_DEFAULT_SENDER
+    MAIL_DEFAULT_SENDER, MAIL_USE_TLS
     )
 
 # 拿當下絕對路徑 -> 在這裡的話也就是 /Users/linpinhung/XXX/life-playlist/app/config
@@ -78,6 +78,7 @@ class DockerDevelopmentConfig(BaseConfig):
     MAIL_SERVER = MAIL_SERVER
     MAIL_USE_SSL = MAIL_USE_SSL
     MAIL_DEFAULT_SENDER = MAIL_DEFAULT_SENDER
+    MAIL_USE_TLS = MAIL_USE_TLS
 
 
 class TestingConfig(BaseConfig):
@@ -91,8 +92,9 @@ class TestingConfig(BaseConfig):
     MAIL_PASSWORD = MAIL_PASSWORD
     MAIL_PORT = MAIL_PORT
     MAIL_SERVER = MAIL_SERVER
-    MAIL_USE_SSL = MAIL_USE_SSL
+    # MAIL_USE_SSL = MAIL_USE_SSL
     MAIL_DEFAULT_SENDER = MAIL_DEFAULT_SENDER
+    MAIL_USE_TLS = MAIL_USE_TLS
 
 
 config = {

@@ -10,7 +10,7 @@ from sendgrid.helpers.mail import *
 
 from app.model.models import Playlist, User, Dashboard
 from app import db, cache, mail, sp
-from app.settings import MAIL_USERNAME, MAIL_USERNAME, SENDGRID_API_KEY
+from app.settings import MAIL_USERNAME, MAIL_USERNAME, SENDGRID_API_KEY, MAIL_DEFAULT_SENDER
 
 
 '''
@@ -108,11 +108,11 @@ def send_mail(current_user_email, soulmate_email, soulmate_firstname):
     msg_title = 'Talk to your life playlist soulmate'
     msg_recipients = [current_user_email]
     # msg_body = f"your life playlist soulmate's email is {soulmate_email}"
-    msg = Message(msg_title, sender=MAIL_USERNAME, recipients=msg_recipients)
+    msg = Message(msg_title, sender=MAIL_DEFAULT_SENDER, recipients=msg_recipients)
     # msg.body = msg_body
     msg.html = render_template(
         'soulmate_mail.html', soulmate_email=soulmate_email, soulmate_firstname=soulmate_firstname)
-    # mail.send(msg)
+    mail.send(msg)
 
     # sg = sendgrid.SendGridClient(SENDGRID_API_KEY)
     # message = sendgrid.Mail()
@@ -123,16 +123,16 @@ def send_mail(current_user_email, soulmate_email, soulmate_firstname):
     # message.set_html("and easy to do anywhere, even with Python")
     # sg.send(message)
 
-    sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
-    from_email = Email("lifeplaylistsmtp@gmail.com")
-    to_email = To("linooohon@gmail.com")
-    subject = "Sending with SendGrid is Fun"
-    content = Content("text/html", "123")
-    mail = Mail(from_email, to_email, subject, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
-    print(response.status_code)
-    print(response.body)
-    print(response.headers)
+    # sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
+    # from_email = Email("lifeplaylistsmtp@gmail.com")
+    # to_email = To("linooohon@gmail.com")
+    # subject = "Sending with SendGrid is Fun"
+    # content = Content("text/html", "123")
+    # mail = Mail(from_email, to_email, subject, content)
+    # response = sg.client.mail.send.post(request_body=mail.get())
+    # print(response.status_code)
+    # print(response.body)
+    # print(response.headers)
 
     return 'You Send Mail by Flask-Mail Success!!'
 
