@@ -4,11 +4,13 @@ from flask_login import login_required, current_user
 from flask_mail import Mail, Message
 # from threading import Thread
 import json
+import sendgrid
+from sendgrid.helpers.mail import *
 
 
 from app.model.models import Playlist, User, Dashboard
 from app import db, cache, mail, sp
-from app.settings import MAIL_USERNAME, MAIL_USERNAME
+from app.settings import MAIL_USERNAME, MAIL_USERNAME, SENDGRID_API_KEY
 
 
 '''
@@ -110,7 +112,28 @@ def send_mail(current_user_email, soulmate_email, soulmate_firstname):
     # msg.body = msg_body
     msg.html = render_template(
         'soulmate_mail.html', soulmate_email=soulmate_email, soulmate_firstname=soulmate_firstname)
-    mail.send(msg)
+    # mail.send(msg)
+
+    # sg = sendgrid.SendGridClient(SENDGRID_API_KEY)
+    # message = sendgrid.Mail()
+
+    # message.add_to("linooohon@gmail.com")
+    # message.set_from("lifeplaylistsmtp@gmail.com")
+    # message.set_subject("Sending with SendGrid is Fun")
+    # message.set_html("and easy to do anywhere, even with Python")
+    # sg.send(message)
+
+    sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
+    from_email = Email("lifeplaylistsmtp@gmail.com")
+    to_email = To("linooohon@gmail.com")
+    subject = "Sending with SendGrid is Fun"
+    content = Content("text/html", "123")
+    mail = Mail(from_email, to_email, subject, content)
+    response = sg.client.mail.send.post(request_body=mail.get())
+    print(response.status_code)
+    print(response.body)
+    print(response.headers)
+
     return 'You Send Mail by Flask-Mail Success!!'
 
 
