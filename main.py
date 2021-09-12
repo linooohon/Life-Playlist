@@ -53,7 +53,7 @@ dashboard_scheduler.start()
 
 email_sending_scheduler = BackgroundScheduler({'apscheduler.timezone': 'UTC'})
 email_sending_scheduler.add_job(func=soulmate_email_sending,
-                                trigger="interval", days=1, start_date='2021-9-12 06:00:00')
+                                trigger="interval", days=1, start_date='2021-9-12 00:00:00')
 email_sending_scheduler.start()
 
 # Shut down the scheduler when exiting the app
