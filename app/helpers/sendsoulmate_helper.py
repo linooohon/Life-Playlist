@@ -4,6 +4,7 @@ from app import db, mail
 from flask_mail import Mail, Message
 from app.settings import MAIL_USERNAME, MAIL_USERNAME, SENDGRID_API_KEY, MAIL_DEFAULT_SENDER
 from flask import render_template
+from smtplib import SMTPException
 
 
 # 檢查送信紀錄是否已有
@@ -54,7 +55,11 @@ def send_mail(current_user_email, soulmate_email, soulmate_firstname):
                   recipients=msg_recipients)
     msg.html = render_template(
         'soulmate_mail.html', soulmate_email=soulmate_email, soulmate_firstname=soulmate_firstname)
-    mail.send(msg)
+    try:
+        mail.send(msg)
+    except SMTPException as e:
+        logging.error(e.message)
+        
     return 'You Send Mail by Flask-Mail Success!!'
 
 
