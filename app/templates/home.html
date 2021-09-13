@@ -1,34 +1,60 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}
 
-
 {% block content %}
-<h1 align="center">Playlist of your life</h1>
-<ul class="list-group list-group-flush" id="playlists">
-    {% for artistAndSong in user.playlists %}
-    <li class="list-group-item">
-        {{ artistAndSong.artist }} - {{ artistAndSong.song }}
-        <button type="button" class="close" onClick="deletePlaylistItem({{ artistAndSong.id }})">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </li>
-    {% endfor %}
-</ul>
+<h1 align="center">My Life Playlist</h1>
+<div class="playlists-div">
+    <ul class="list-group list-group-flush personal_ul" id="playlists">
+        {% for artistAndSong in user.playlists %}
+        <li class="list-group-item personal_li">
+            <div class="song_genre">
+                <p class="artist_song">{{ artistAndSong.artist }} - {{ artistAndSong.song }}</p>
+                {% if artistAndSong.artist_genres != None %}
+                {% for genre in artistAndSong.artist_genres %}
+                <span> / {{ genre }}</span>
+                {% endfor %}
+                {% else %}
+                <!-- <span>Finding genre 🦻</span> -->
+                {% endif %}
+            </div>
+            <div class="artistsong_image">
+                {% if artistAndSong.artist_spotify_image_url != None %}
+                <img src="{{ artistAndSong.artist_spotify_image_url }}" alt="Life Playlist Image" width="100px">
+                {% else %}
+                {% endif %}
+                <div>
+                    {% if artistAndSong.artist_spotify_uri != None %}
+                    <a href="{{ artistAndSong.artist_spotify_uri }}" class="dashboard-a spotify"><i
+                            class="fab fa-spotify"></i>Listen
+                        now</a>
+                    {% else %}
+                    <a href="#" class="dashboard-a spotify"><i class="fab fa-spotify"></i>Update soon</a>
+                    {% endif %}
+                </div>
+            </div>
+            <button type="button" class="close" onClick="deletePlaylistItem({{ artistAndSong.id }})">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 <br />
 <form method="POST">
-    <p>Artist's name:</p>
-    <textarea name="artist" id="artist" class="form-control"></textarea>
-    <br />
-    <p>Song's name:</p>
-    <textarea name="song" id="song" class="form-control"></textarea>
-    <div align="center">
-        <button type="submit" class="btn btn-primary" id="addsong__button">Add your love song</button>
+    <div class="addsong_div">
+        <p>Artist's name:</p>
+        <textarea name="artist" id="artist" class="form-control"></textarea>
+        <br />
+        <p>Song's name:</p>
+        <textarea name="song" id="song" class="form-control"></textarea>
+        <div align="center">
+            <button type="submit" class="btn btn-primary" id="addsong__button">Add your love song</button>
+        </div>
     </div>
 </form>
 
 {% if messages %}
 {% else %}
 {% endif %}
-
 
 
 <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">

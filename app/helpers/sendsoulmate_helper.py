@@ -1,29 +1,38 @@
 import logging
-from app.model.models import User, Soulmate_Record
-from app import db, mail
 from flask_mail import Mail, Message
-from app.settings import MAIL_USERNAME, MAIL_USERNAME, SENDGRID_API_KEY, MAIL_DEFAULT_SENDER
 from flask import render_template
 from smtplib import SMTPException
+
+from app.model.models import User, Soulmate_Record
+from app import db, mail
+from app.repo.repo import Repo
+from app.settings import MAIL_USERNAME, MAIL_USERNAME, SENDGRID_API_KEY, MAIL_DEFAULT_SENDER
 
 
 # 檢查送信紀錄是否已有
 def check_soulmate_record_in_db(original_email, soulmate_email, db_artistsong_lowerstrip):
     record_samesong_lists = []
     pre_record_soulmate_lists = []
-    pre_record_lists = Soulmate_Record.query.filter_by(
-        original_email=original_email).all()
-    
+
+    # get db data
+    filter_dict = {"original_email": original_email}
+    repo = Repo(Soulmate_Record)
+    pre_record_lists = repo.get_all_filter_by(filter_dict)
+
     for pre_record in pre_record_lists:
         pre_record_soulmate_lists.append(pre_record.soulmate_email)
 
     if soulmate_email in pre_record_soulmate_lists:
-        record_lists = Soulmate_Record.query.filter_by(
-            original_email=original_email, soulmate_email=soulmate_email).all()
-        
+
+        # get db data
+        filter_dict = {"original_email": original_email,
+                       "soulmate_email": soulmate_email}
+        repo = Repo(Soulmate_Record)
+        record_lists = repo.get_all_filter_by(filter_dict)
+
         for record in record_lists:
             record_samesong_lists.append(record.same_song)
-        
+
         if db_artistsong_lowerstrip in record_samesong_lists:
             print(
                 f"{original_email} had same song with {soulmate_email} before, so don't send again")
@@ -39,10 +48,13 @@ def check_soulmate_record_in_db(original_email, soulmate_email, db_artistsong_lo
 
 # 把此次送信紀錄記在 db
 def save_soulmate_record_to_db(original_email, soulmate_email, db_artistsong_lowerstrip):
-    new_soulmate_record_item = Soulmate_Record(
-        original_email=original_email, soulmate_email=soulmate_email, same_song=db_artistsong_lowerstrip)
-    db.session.add(new_soulmate_record_item)
-    db.session.commit()
+    data_dic = {
+        "original_email": original_email,
+        "soulmate_email": soulmate_email,
+        "same_song": db_artistsong_lowerstrip
+    }
+    repo = Repo(Soulmate_Record)
+    repo.insert_data(data_dic)
 
 
 # 寄信
@@ -59,9 +71,8 @@ def send_mail(current_user_email, soulmate_email, soulmate_firstname):
         mail.send(msg)
     except SMTPException as e:
         logging.error(e.message)
-        
-    return 'You Send Mail by Flask-Mail Success!!'
 
+    return 'You Send Mail by Flask-Mail Success!!'
 
 
 # 找出目前 user 的 artistsong lowerstrip list, 變小寫, 去空格
@@ -114,16 +125,6 @@ def check_same_song_lover():
                                current_artistsong_lowerstrip_list)
     print("Finish updated")
     logging.info("=========Finish updated=========")
-
-
-
-
-
-
-
-
-
-
 
 
 # Legacy

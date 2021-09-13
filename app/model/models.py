@@ -6,8 +6,11 @@ from app import db
 
 class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    artist = db.Column(db.String(10000))
-    song = db.Column(db.String(10000))
+    artist = db.Column(db.String(500))
+    artist_spotify_uri = db.Column(db.String(500))
+    artist_spotify_image_url = db.Column(db.String(500))
+    song = db.Column(db.String(500))
+    artist_genres = db.Column(db.JSON)
     date = db.Column(db.DateTime(timezone=True), default=func.now())  # 拿到當下時間
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # 拿使用者 id 當 fk
     # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # 拿使用者 id 當 fk
@@ -18,6 +21,7 @@ class Playlist(db.Model):
         self.artist = artist
         self.song = song
         self.user_id = user_id
+        # self.artist_genres = artist_genres
 
 
 class User(db.Model, UserMixin):
@@ -39,13 +43,17 @@ class Dashboard(db.Model):
     dashboard_artist = db.Column(db.String(500))
     dashboard_song = db.Column(db.String(500))
     artist_spotify_uri = db.Column(db.String(500))
+    artist_spotify_image_url = db.Column(db.String(500))
+    artist_genres = db.Column(db.JSON)
     song_youtube_url = db.Column(db.String(500))
 
-    def __init__(self, dashboard_artist, dashboard_song, artist_spotify_uri, song_youtube_url):
+    def __init__(self, dashboard_artist, dashboard_song, artist_spotify_uri, song_youtube_url, artist_spotify_image_url, artist_genres):
         self.dashboard_artist = dashboard_artist
         self.dashboard_song = dashboard_song
         self.artist_spotify_uri = artist_spotify_uri
         self.song_youtube_url = song_youtube_url
+        self.artist_spotify_image_url = artist_spotify_image_url
+        self.artist_genres = artist_genres
 
 
 class Soulmate_Record(db.Model):

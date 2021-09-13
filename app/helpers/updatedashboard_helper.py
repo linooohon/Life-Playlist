@@ -1,13 +1,17 @@
 import sys
 import collections
-from threading import current_thread
 import time
+import random
+import logging
+
+from datetime import datetime
+from threading import current_thread
+from youtubesearchpython import VideosSearch
+
 from app import db, sp
 from app.model.models import Playlist, Dashboard
-from youtubesearchpython import VideosSearch
-# import subprocess
-from datetime import datetime
-import logging
+from app.repo.repo import Repo
+
 
 
 def search_on_youtube(artist_and_song):
@@ -19,27 +23,25 @@ def search_on_youtube(artist_and_song):
 
 
 def search_on_spotify(artist):
-    r = sp.search(q=artist, limit=3, type='artist')
-    if r['artists']['total'] == 0:
-        return 'None'
-    else:
-        # make spotify uri
+    """Fetch Spotify API
+
+    Get artist spotify page:
+        - method (1)
         id = r['artists']['items'][0]['id']
         uri = f"spotify:artist:{id}"
-        return uri
 
-    # for idx, track in enumerate(r['tracks']['items']):
-    #     print(idx, track['name'], track['uri']) # uri 可以開啟 spotify 播到那首歌
+        - method (2)
+        uri = r['artists']['items'][0]['uri']
 
-    # lz_uri = 'spotify:artist:36QJpDe2go2KgaRleHCDTp'
-    # results = sp.artist_top_tracks(lz_uri)
-    # for track in results['tracks'][:10]:
-    #     print('track    : ' + track['name'])
-    #     print('audio    : ' + track['preview_url'])  #這個可以聽30秒
-    #     print('cover art: ' + track['album']['images'][0]['url'])
-    #     print()
-    # results = sp.search(q='weezer', limit=20)
-    # print(results)
+    """
+    r = sp.search(q=artist, limit=3, type='artist')
+    if r['artists']['total'] == 0:
+        return 'None', 'None', 'None'
+    else:
+        uri = r['artists']['items'][0]['uri']
+        pic_url = r['artists']['items'][0]['images'][0]['url']
+        genres = r['artists']['items'][0]['genres']
+        return uri, pic_url, genres
 
 
 def fetch_spotify_youtube():
@@ -47,8 +49,10 @@ def fetch_spotify_youtube():
         filename="dashboard_update.log", level=logging.INFO)
     print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
     print('call spotify and youtube api')
+    current_time = str(datetime.now())
     try:
-        all_playlist = Playlist.query.all()
+        repo = Repo(Playlist)
+        all_playlist = repo.get_all()
         print("query is fine")
 
         count_songs_preset_list = []
@@ -92,22 +96,56 @@ def fetch_spotify_youtube():
         Dashboard.query.delete()
         # use Youtbue API and Spotify API
         for i in final_list:
+            time.sleep(random.randrange(1, 3))
             # find song's url on youtube
             artist_and_song = i.artist + i.song
             i.youtube_url = search_on_youtube(artist_and_song)
             # find artist's page on spotify
-            i.spotify_uri = search_on_spotify(i.artist)
-
+            i.spotify_uri, i.spotify_image_url, i.genres = search_on_spotify(i.artist)
+            
+            data_dict = {
+                "dashboard_artist": i.artist,
+                "dashboard_song": i.song,
+                "artist_spotify_uri": i.spotify_uri,
+                "artist_spotify_image_url": i.spotify_image_url,
+                "song_youtube_url": i.youtube_url,
+                "artist_genres": i.genres
+            }
             # update db
-            new_top10_data = Dashboard(
-                dashboard_artist=i.artist, dashboard_song=i.song, artist_spotify_uri=i.spotify_uri, song_youtube_url=i.youtube_url)
-            db.session.add(new_top10_data)
-            db.session.commit()
+            repo = Repo(Dashboard)
+            repo.insert_data(data_dict)
         print("update to db success")
-        current_time = str(datetime.now())
         logging.info(f"SUCCESS, fetch spotify and youtube api, finished updated dashboard -> time: {current_time}")
     except:
         logging.info(
             f"FAIL, fetch spotify and youtube api, updating dashboard have some problem -> time: {current_time}")
         print("Unexpected error when execute spotify youtube api:",
               sys.exc_info()[0])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# [Legacy]
+
+# for idx, track in enumerate(r['tracks']['items']):
+#     print(idx, track['name'], track['uri']) # uri 可以開啟 spotify 播到那首歌
+
+# lz_uri = 'spotify:artist:36QJpDe2go2KgaRleHCDTp'
+# results = sp.artist_top_tracks(lz_uri)
+# for track in results['tracks'][:10]:
+#     print('track    : ' + track['name'])
+#     print('audio    : ' + track['preview_url'])  #這個可以聽30秒
+#     print('cover art: ' + track['album']['images'][0]['url'])
+#     print()
+# results = sp.search(q='weezer', limit=20)
+# print(results)

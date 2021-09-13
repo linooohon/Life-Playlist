@@ -53,7 +53,6 @@ def sign_up():
         password2 = request.form.get('password2')
 
         user = sign_up_user_exist(email)
-        # user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
         elif len(email) < 4:

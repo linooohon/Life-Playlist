@@ -25,7 +25,6 @@ views = Blueprint('views', __name__)
 def home():
     print("/ GET 沒走 cache")
     if request.method == 'POST':
-
         artist = request.form.get('artist')
         song = request.form.get('song')
 

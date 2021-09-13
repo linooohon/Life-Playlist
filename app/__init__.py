@@ -43,7 +43,6 @@ def create_app(config_name):
     app.register_blueprint(auth, url_prefix='/')
 
     from app.model.models import User, Playlist, Dashboard
-
     # create_database(app)
 
     login_manager = LoginManager()

@@ -5,7 +5,7 @@ h1 {
 }
 
 p {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 html, body {
@@ -83,22 +83,39 @@ input:focus {
 }
 
 .dashboard-ul {
-    width: 700px;
+    width: 720px;
+    border-radius: 10px;
 }
 
 .dashboard-li {
     font-weight: 700;
     display: flex;
     justify-content: space-between;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 15px;
 }
 
-.dashboard-li .spotify_and_youtube {
-    @media (max-width: 767px) {
-        display: flex;
-        justify-content: space-between;
-    }
+.dashboard-li .artistsong_image{
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
 }
+
+.dashboard-li .artistsong_image img {
+    width: 20%;
+}
+
+#dashboard_genre {
+    margin-left: 1rem;
+    /* display: inline; */
+}
+
+/* .dashboard-li .spotify_and_youtube {
+    display: flex;
+    justify-content: flex-start;
+} */
 
 .spotify {
     color: #72d8bf;
@@ -131,10 +148,24 @@ input:focus {
     height: 3rem;
 }
 
-
 /* Intro */
 .intro_description {
     padding: 0 10rem;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: center;
+    margin: 4rem 0;
+}
+
+.footer a {
+    color: #000000;
+}
+
+.footer a:hover {
+    color: #e95454;
 }
 
 @media (max-width: 1279px) {
@@ -145,7 +176,7 @@ input:focus {
 
     .intro_description {
         padding: 0 10rem;
-    }   
+    }
 }
 
 @media (max-width: 1023px) {
@@ -156,17 +187,12 @@ input:focus {
 
     .intro_description {
         padding: 0 6rem;
-    }   
+    }
 }
 
 @media (max-width: 767px) {
     .dashboard-li {
         flex-direction: column;
-    }
-
-    .dashboard-li .spotify_and_youtube {
-        display: flex;
-        justify-content: space-between;
     }
 
     .loginsignup_formsection .form-group {
@@ -180,5 +206,14 @@ input:focus {
 
     .intro_description {
         padding: 0 1rem;
+    }
+
+    .dashboard-li .artistsong_image img {
+        width: 30%;
+    }
+
+    .dashboard-ul {
+        width: 400px;
+        border-radius: 10px;
     }
 }

@@ -6,8 +6,11 @@
 <div class="dashboard-div">
     <ul class="list-group list-group-flush dashboard-ul" id="playlists">
         {% for artist_and_song in dashboard_data %}
-        <li class="list-group-item dashboard-li">
-            <p>{{ artist_and_song.dashboard_artist }} - {{ artist_and_song.dashboard_song }}</p>
+        <li class="dashboard-li">
+            <div class="artistsong_image">
+                <p>{{ artist_and_song.dashboard_artist }} - {{ artist_and_song.dashboard_song }}</p>
+                <img src="{{ artist_and_song.artist_spotify_image_url }}" alt="Life Playlist Dashboard Image">
+            </div>
             <p class="spotify_and_youtube">
                 {% if artist_and_song.artist_spotify_uri != 'None' %}
                 <a href="{{ artist_and_song.artist_spotify_uri }}" class="dashboard-a spotify"><i
@@ -17,15 +20,29 @@
                 {% endif %}
                 {% if artist_and_song.song_youtube_url != 'None' %}
                 <a href="{{ artist_and_song.song_youtube_url }}" class="dashboard-a youtube" target="_blank"><i
-                        class="fab fa-youtube"></i>On Youtube</a>
+                        class="fab fa-youtube"></i>On YouTube</a>
                 {% else %}
                 <sapn>Oops, not on Youtube</sapn>
                 {% endif %}
+                <select style="width:100px; height:20px;">
+                    <option selected="Genre" disabled>Genre</option>
+                    {% for genre in artist_and_song.artist_genres %}
+                    <option>{{ genre }}</option>
+                    {% endfor %}
+                </select>
             </p>
         </li>
+        <!-- <div id="dashboard_genre">
+            {% for genre in artist_and_song.artist_genres %}
+            <span> / {{ genre }}</span>
+            {% endfor %}
+        </div> -->
         {% endfor %}
     </ul>
 </div>
+
+
+
 <!-- {% for uri in spotify_artistpage %}
 <a href="{{ uri }}">link</a>
 {% endfor %} -->
