@@ -2,7 +2,7 @@ import sys
 import collections
 import time
 import random
-import logging
+# import logging
 
 from datetime import datetime
 from threading import current_thread
@@ -44,11 +44,11 @@ def search_on_spotify(artist):
         return uri, pic_url, genres
 
 
-def fetch_spotify_youtube():
-    logging.basicConfig(
-        filename="dashboard_update.log", level=logging.INFO)
-    print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
-    print('call spotify and youtube api')
+def fetch_spotify_youtube(dashboard_update_logger):
+    # logging.basicConfig(
+    #     filename="dashboard_update.log", level=logging.INFO)
+    # print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
+    # print('call spotify and youtube api')
     current_time = str(datetime.now())
     try:
         repo = Repo(Playlist)
@@ -115,9 +115,10 @@ def fetch_spotify_youtube():
             repo = Repo(Dashboard)
             repo.insert_data(data_dict)
         print("update to db success")
-        logging.info(f"SUCCESS, fetch spotify and youtube api, finished updated dashboard -> time: {current_time}")
+        dashboard_update_logger.info(
+            f"SUCCESS, fetch spotify and youtube api, finished updated dashboard -> time: {current_time}")
     except:
-        logging.info(
+        dashboard_update_logger.info(
             f"FAIL, fetch spotify and youtube api, updating dashboard have some problem -> time: {current_time}")
         print("Unexpected error when execute spotify youtube api:",
               sys.exc_info()[0])

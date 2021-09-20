@@ -2,7 +2,7 @@ import sys
 import collections
 import time
 import random
-import logging
+# import logging
 
 from datetime import datetime
 from threading import current_thread
@@ -34,9 +34,9 @@ def search_on_spotify(artist):
         return uri, pic_url, genres
 
 
-def update_user_playlist():
-    logging.basicConfig(
-        filename="userplaylist_update.log", level=logging.INFO)
+def update_user_playlist(userplaylist_update_logger):
+    # logging.basicConfig(
+    #     filename="userplaylist_update.log", level=logging.INFO)
     print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
     user_playlists_withnullgenre = User.query.join(Playlist, User.id == Playlist.user_id).filter(
         Playlist.artist_genres == None).limit(100).all()
@@ -61,10 +61,10 @@ def update_user_playlist():
                 new_update_playlist_row.artist_genres = j.genres
                 db.session.commit()
                 print("update to db success")
-                logging.info(
+                userplaylist_update_logger.info(
                     f"SUCCESS, fetch spotify api, finished updated user playlist -> time: {current_time}")
     except:
-        logging.info(
+        userplaylist_update_logger.info(
             f"FAIL, fetch spotify api, updating user playlist have some problem -> time: {current_time}")
         print("Unexpected error when execute spotify api:",
               sys.exc_info()[0])

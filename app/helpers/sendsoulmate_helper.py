@@ -1,4 +1,4 @@
-import logging
+# import logging
 from flask_mail import Mail, Message
 from flask import render_template
 from smtplib import SMTPException
@@ -15,7 +15,7 @@ def check_soulmate_record_in_db(original_email, soulmate_email, db_artistsong_lo
     pre_record_soulmate_lists = []
 
     # get db data
-    filter_dict = {"original_email": original_email}
+    filter_dict = {'original_email': original_email}
     repo = Repo(Soulmate_Record)
     pre_record_lists = repo.get_all_filter_by(filter_dict)
 
@@ -25,8 +25,8 @@ def check_soulmate_record_in_db(original_email, soulmate_email, db_artistsong_lo
     if soulmate_email in pre_record_soulmate_lists:
 
         # get db data
-        filter_dict = {"original_email": original_email,
-                       "soulmate_email": soulmate_email}
+        filter_dict = {'original_email': original_email,
+                       'soulmate_email': soulmate_email}
         repo = Repo(Soulmate_Record)
         record_lists = repo.get_all_filter_by(filter_dict)
 
@@ -49,9 +49,9 @@ def check_soulmate_record_in_db(original_email, soulmate_email, db_artistsong_lo
 # 把此次送信紀錄記在 db
 def save_soulmate_record_to_db(original_email, soulmate_email, db_artistsong_lowerstrip):
     data_dic = {
-        "original_email": original_email,
-        "soulmate_email": soulmate_email,
-        "same_song": db_artistsong_lowerstrip
+        'original_email': original_email,
+        'soulmate_email': soulmate_email,
+        'same_song': db_artistsong_lowerstrip
     }
     repo = Repo(Soulmate_Record)
     repo.insert_data(data_dic)
@@ -59,20 +59,20 @@ def save_soulmate_record_to_db(original_email, soulmate_email, db_artistsong_low
 
 # 寄信
 # email setting for sending soulemate's email to user
-def send_mail(current_user_email, soulmate_email, soulmate_firstname):
-    print("start to sent email")
-    msg_title = 'Talk to your life playlist soulmate'
+def send_mail(current_user_email, soulmate_email, soulmate_firstname, send_soulmate_email_logger, song):
+    print('start to sent email')
+    msg_title = 'Talk to your Life Playlist soulmate'
     msg_recipients = [current_user_email]
     msg = Message(msg_title, sender=MAIL_DEFAULT_SENDER,
                   recipients=msg_recipients)
     msg.html = render_template(
-        'soulmate_mail.html', soulmate_email=soulmate_email, soulmate_firstname=soulmate_firstname)
+        'soulmate_mail.html', soulmate_email=soulmate_email, soulmate_firstname=soulmate_firstname, current_user_email=current_user_email, song=song)
     try:
         mail.send(msg)
     except SMTPException as e:
-        logging.error(e.message)
+        send_soulmate_email_logger.error(e.message)
 
-    return 'You Send Mail by Flask-Mail Success!!'
+    send_soulmate_email_logger.info('You Send Mail by Flask-Mail Success!!')
 
 
 # 找出目前 user 的 artistsong lowerstrip list, 變小寫, 去空格
@@ -88,11 +88,12 @@ def current_artistsong_lowerstrip(current_user):
 
 
 # 從 db loop 每個 user 的 playlist 看有沒有歌出現在現在這個當前 user 的 playlist
-def loop_all_user_playlist(current_user, all_user, current_artistsong_lowerstrip_list):
+def loop_all_user_playlist(current_user, all_user, current_artistsong_lowerstrip_list, send_soulmate_email_logger):
     samesong_list = []
     for i in all_user:
         for j in i.playlists:
             db_artistsong = j.__dict__['artist'] + j.__dict__['song']
+            song = j.__dict__['song']
             db_artistsong_lowerstrip = ''.join(
                 db_artistsong.lower().strip().split())
             if db_artistsong_lowerstrip in current_artistsong_lowerstrip_list and i.id is not current_user.id \
@@ -109,22 +110,22 @@ def loop_all_user_playlist(current_user, all_user, current_artistsong_lowerstrip
                         save_soulmate_record_to_db(
                             current_user.email, your_soulmate_email, db_artistsong_lowerstrip)
                         send_mail(current_user.email, your_soulmate_email,
-                                  your_soulmate_firstname)
+                                  your_soulmate_firstname, send_soulmate_email_logger, song)
 
 
-def check_same_song_lover():
-    logging.basicConfig(
-        filename="send_soulmate_email.log", level=logging.INFO)
-    logging.info("========Start to update========")
+def check_same_song_lover(send_soulmate_email_logger):
+    # logging.basicConfig(
+    #     filename="send_soulmate_email.log", level=logging.INFO)
+    send_soulmate_email_logger.info('========Start to update========')
     all_user = User.query.all()
     for user in all_user:
         current_artistsong_lowerstrip_list = current_artistsong_lowerstrip(
             user)
         # 從 db 找全部 playlist 看有沒有歌出現在現在這個 user 的 playlist
         loop_all_user_playlist(user, all_user,
-                               current_artistsong_lowerstrip_list)
-    print("Finish updated")
-    logging.info("=========Finish updated=========")
+                               current_artistsong_lowerstrip_list, send_soulmate_email_logger)
+    print('Finish updated')
+    send_soulmate_email_logger.info('=========Finish updated=========')
 
 
 # Legacy
