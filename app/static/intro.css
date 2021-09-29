@@ -60,21 +60,26 @@
     background-color:#fff;
 }
 
-.intro_readmediv {
+.intro_readme .intro_readmediv {
     display: flex;
     justify-content: center;
     font-size: 2rem;
     padding: 4rem 0;
 }
 
-.intro_readmepointdiv {
+.intro_readme .intro_readmepointdiv {
     display: flex;
     justify-content: center;
-    font-size: 1.3rem;
+    /* font-size: 1.3rem; */
 }
 
-.intro_readmepointdiv ul {
+.intro_readme .intro_readmepointdiv ul {
     list-style: none;
+    /* margin: auto; */
+}
+
+.intro_readme .intro_readmepointdiv_li {
+    font-size: 0.85rem;
 }
 
 @media (min-width: 568px) {
@@ -90,6 +95,10 @@
 
     .intro_description_div {
         padding: 0 3rem;
+    }
+
+    .intro_readme .intro_readmepointdiv_li {
+        font-size: 1.3rem;
     }
 }
 
