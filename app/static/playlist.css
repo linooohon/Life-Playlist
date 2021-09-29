@@ -47,6 +47,7 @@
 .artist_song {
     font-weight: 700;
     text-decoration: underline;
+    margin-top: 15px;
 }
 
 @media (min-width: 321px) {

@@ -2,14 +2,14 @@
 
 
 {% block content %}
-<h1 align="center" class="intro_title">Music is must, record your Life Playlist.</h1>
+<h1 align="center" class="intro_title">Music is must, record your Life Playlist</h1>
 <h3 align="center" class="intro_slogan">" You can tell a lot about a person by what's on their playlist. " 💭</h3>
 {% if not user.is_authenticated %}
 <div align="center" class="startusing_div">
     <button class="startusing_button"><a href="/sign-up" class="startusing_a">Start Using Now</a></button>
 </div>
 {% endif %}
-<p align="center">----------------------------------</p>
+<p align="center" style="margin-top:10px;">----------------------------------</p>
 <div align="center" class="intro_description_div">
     <p class="intro_description_p">
         So, this is a small app, you can create your own playlist.
@@ -18,6 +18,9 @@
     </p>
 </div>
 
+<div class="intro_pic1_div">
+    <img src="/static/intro_pic1.png" alt="lifeplaylist.app" class="intro_pic1">
+</div>
 
 <!-- <div class="intro_readme">
     <ul>
@@ -34,12 +37,12 @@
 <div class="intro_readme">
     <div class="intro_readmediv">Readme:</div>
     <div class="intro_readmepointdiv">
-        <ul>
-            <li class="intro_readmepointdiv_li">1. Sign up & Login.</li>
-            <li class="intro_readmepointdiv_li">2. Enter your life songs.</li>
-            <li class="intro_readmepointdiv_li">3. Check the dashboard and genres.</li>
-            <li class="intro_readmepointdiv_li">4. And maybe you will find your soulmates.</li>
-        </ul>
+        <div>
+            <p class="intro_readmepointdiv_li">1. Sign up & Login.</p>
+            <p class="intro_readmepointdiv_li">2. Enter your life songs.</p>
+            <p class="intro_readmepointdiv_li">3. Check the dashboard and genres.</p>
+            <p class="intro_readmepointdiv_li">4. And maybe you will find your soulmates.</p>
+        </div>
     </div>
 </div>
 {% endblock %}

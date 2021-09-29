@@ -2,13 +2,15 @@
     font-size: 1.8rem;
     font-weight: 800;
     color: #272f2d;
-    padding: 1.3rem 0;
+    padding: 1.3rem 1px;
 }
 
 .intro_slogan {
     font-size: 0.8rem;
     color: #fff;
     padding: 1.3rem 0;
+    letter-spacing: 1px;
+    line-height: 1.5;
 }
 
 .startusing_div {
@@ -82,6 +84,27 @@
     font-size: 0.85rem;
 }
 
+.intro_description_p {
+    letter-spacing: 1px;
+    line-height: 2;
+    margin-bottom: 0;
+}
+
+.intro_pic1_div {
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+}
+
+.intro_pic1 {
+    position: relative;
+    bottom: -40px;
+    border-radius: 20px;
+    box-shadow: 5px 3px 12px 5px rgb(241, 211, 211);
+    width: 280px;
+    height: 130px;
+}
+
 @media (min-width: 568px) {
     .intro_title {
         font-size: 2rem;
@@ -99,6 +122,12 @@
 
     .intro_readme .intro_readmepointdiv_li {
         font-size: 1.3rem;
+    }
+
+    .intro_pic1 {
+        width: 480px;
+        height: 230px;
+        /* bottom: -120px; */
     }
 }
 

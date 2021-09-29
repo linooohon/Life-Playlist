@@ -5,12 +5,13 @@ h1 {
 }
 
 p {
-    margin-top: 1.5rem;
+    /* margin-top: 1.5rem; */
 }
 
 html, body {
     /* background-color:rgb(232, 199, 185); */
     font-family: 'Ubuntu Mono', monospace;
+    border-bottom: 3px solid #094d3c;
 }
 
 #custom-navbar .custom-menu-nav-item {
@@ -37,15 +38,14 @@ input:focus {
     background-color: #cba1a1;
     border-radius: 5%;
     border: 2px solid #ebeaea;
-    margin-top: 2rem;
+    margin-top: 4rem;
+    position: relative;
+    bottom: 40px;
 }
 
 
 #signup_login_button:hover {
     background-color: #f7afaf;
-    border-radius: 5%;
-    border: 2px solid #edecec;
-    margin-top: 2rem;
 }
 
 #custom-navbar {
@@ -100,6 +100,10 @@ input:focus {
     border-radius: 10px;
     margin-top: 10px;
     margin-left: 15px;
+}
+
+.dashboard-li p{
+    margin-top: 20px;
 }
 
 .dashboard-li .artistsong_image{
@@ -169,19 +173,61 @@ input:focus {
     height: 3rem;
 }
 
+
+/* navbar + container */
+.wrapper {
+    background-color: #cba1a1;
+    /* background-color: #f3a1a1; */
+    /* background-color: #E7C7B9; */
+    /* padding-bottom: 3rem; */
+    border-top: 3px solid #094d3c;
+}
+
+.container {
+    padding: 1rem 0;    
+}
+
 /* Footer */
 .footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin: 4rem 0;
+    margin: 3rem 0 0 0;
 }
 
-.footer a {
-    color: #000000;
+.footer .footer_nav {
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 1px solid rgb(201, 200, 200);
+    padding: 5px 0;
 }
 
-.footer a:hover {
-    color: #e95454;
+.footer .footer_nav a{
+    color:rgb(138, 137, 137);
+    text-decoration: none;
+}
+
+.footer .footer_nav a:hover {
+    color:#e95454;
+}
+
+.footer .creator {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.footer .creator p a{
+    color: #000;
+    text-decoration: none;
+}
+
+.footer .creator p a:hover {
+    color:#e95454;
+}
+
+.footer .creator p{
+    margin-bottom: 0;
 }
 
 

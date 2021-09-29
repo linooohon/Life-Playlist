@@ -58,20 +58,6 @@
     bottom: 3px;
 }
 
-
-/* navbar + container */
-.wrapper {
-    background-color: #cba1a1;
-    /* background-color: #f3a1a1; */
-    /* background-color: #E7C7B9; */
-    padding-bottom: 3rem;
-    border-top: 3px solid #094d3c;
-}
-
-.container {
-    /* padding: 1rem 0;     */
-}
-
 @media (min-width: 568px) {
     .notlogin_navbar {
         width: 600px;

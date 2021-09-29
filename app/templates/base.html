@@ -91,26 +91,26 @@
         <!-- Login Alert Messages 這裡先註解掉-->
 
         {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    {% if category == 'error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
-        {{ message }}
-        <button type="button" class="close" data-dismiss="alert">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
-        {{ message }}
-        <button type="button" class="close" data-dismiss="alert">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+        {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
 
         <!-- Login Alert Messages 這裡先註解掉-->
 
@@ -127,7 +127,13 @@
     </div>
 
     <div class="footer">
-        <p>&copy; <a href="https://linooohon.com/" target=_black>linooohon</a> ✍️</p>
+        <div class="footer_nav">
+            <a href="/">Home</a>
+            <a href="mailto:lifeplaylistsmtp@gmail.com">Contact</a>
+        </div>
+        <div class="creator">
+            <p>&copy; <a href="https://linooohon.com/" target=_black>linooohon</a> ✍️</p>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
