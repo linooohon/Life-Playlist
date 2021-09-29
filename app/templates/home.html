@@ -4,6 +4,9 @@
 <h1 align="center">My Life Playlist</h1>
 <div class="playlists-div">
     <ul class="list-group list-group-flush personal_ul" id="playlists">
+        {% if not user.playlists %}
+        <p align="center">Your life playlist is empty, add songs to your playlist now 🙌</p>
+        {% endif %}
         {% for artistAndSong in user.playlists %}
         <li class="list-group-item personal_li">
             <div class="song_genre">
@@ -57,5 +60,5 @@
 {% endif %}
 
 
-<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> -->
 {% endblock %}

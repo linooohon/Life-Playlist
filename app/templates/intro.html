@@ -1,15 +1,45 @@
-{% extends "base.html" %} {% block title %}Intro{% endblock %}
+{% extends "base.html" %} {% block title %}Life Playlist: Music is must, record your Life Playlist{% endblock %}
 
 
 {% block content %}
-<h1 align="center">Intro</h1>
-<h5 align="center">" You can tell a lot about a person by what's on their playlist. " 💭</h5>
+<h1 align="center" class="intro_title">Music is must, record your Life Playlist.</h1>
+<h3 align="center" class="intro_slogan">" You can tell a lot about a person by what's on their playlist. " 💭</h3>
+{% if not user.is_authenticated %}
+<div align="center" class="startusing_div">
+    <button class="startusing_button"><a href="/sign-up" class="startusing_a">Start Using Now</a></button>
+</div>
+{% endif %}
 <p align="center">----------------------------------</p>
-<p align="center" class="intro_description">
-    So, this is a small app, you can create your own playlist.
-    You may check the dashboard to listen to other guys' favorite songs.
-    And also you will receive email if someone has one song same with yours.
-</p>
+<div align="center" class="intro_description_div">
+    <p class="intro_description_p">
+        So, this is a small app, you can create your own playlist.
+        You may check the dashboard to listen to other guys' favorite songs.
+        And also you will receive email if someone has one song same with yours.
+    </p>
+</div>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+<!-- <div class="intro_readme">
+    <ul>
+        <li>Readme:</li>
+    </ul>
+</div> -->
+
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> -->
+{% endblock %}
+
+
+
+{% block intro_readme %}
+<div class="intro_readme">
+    <div class="intro_readmediv">Readme:</div>
+    <div class="intro_readmepointdiv">
+        <ul>
+            <li>1. Sign up & Login.</li>
+            <li>2. Enter your life songs.</li>
+            <li>3. Check the dashboard and genres.</li>
+            <li>4. And maybe you will find your soulmates.</li>
+        </ul>
+    </div>
+</div>
 {% endblock %}

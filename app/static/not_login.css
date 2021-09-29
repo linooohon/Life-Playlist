@@ -1,0 +1,128 @@
+#custom-navbar {
+    display: flex;
+    justify-content: center;
+}
+
+.notlogin_navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    padding: 2rem 1rem;
+}
+
+.signup_login {
+    display: flex;
+    justify-content: center;
+}
+
+.signup_login a {
+    padding: 0 10px;
+    margin: 0 5px;
+    text-decoration: none;
+    font-size: 0.7rem;
+}
+
+.signup_login a:hover {
+    opacity: 0.8;
+}
+
+.signup_login #login {
+    color: #094d3c;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding-top: 3px;
+}
+
+.signup_login #signUp {
+    color: #fff;
+    background-color: #094d3c;
+    border-radius: 5px;
+    padding-top: 5px;
+}
+
+.main_icon #main_icon_a {
+    color: #094d3c;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.main_icon #intro:hover {
+    opacity: 0.8
+}
+
+.main_icon .main_iconimage {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    bottom: 3px;
+}
+
+
+/* navbar + container */
+.wrapper {
+    background-color: #cba1a1;
+    /* background-color: #f3a1a1; */
+    /* background-color: #E7C7B9; */
+    padding-bottom: 3rem;
+    border-top: 3px solid #094d3c;
+}
+
+.container {
+    /* padding: 1rem 0;     */
+}
+
+@media (min-width: 568px) {
+    .notlogin_navbar {
+        width: 600px;
+    }
+
+    .main_icon #intro {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    .signup_login a {
+        font-size: 0.9rem;
+    }
+
+    .signup_login #login {
+        padding-top: 1px;
+    }
+
+    .signup_login #signUp {
+        padding-top: 3px;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .notlogin_navbar {
+        width: 700px;
+    }
+
+    .signup_login a {
+        padding: 0 20px;
+        margin: 0 5px;
+    }
+
+    .main_icon #intro {
+        font-weight: 800;
+        font-size: 1.3rem;
+    }
+
+    .signup_login a {
+        font-size: 1rem;
+    }
+
+    .signup_login #login {
+        padding-top: 0.2rem;
+    }
+
+    .signup_login #signUp {
+        padding-top: 0.3rem;
+    }
+
+    .main_icon #main_icon_a {
+        font-size: 1.4rem;
+    }
+}

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/static/main_icon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -15,7 +16,10 @@
 
     <!--personal-->
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='playlist.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='not_login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='intro.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
@@ -29,7 +33,40 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="wrapper">
+        <nav>
+            <div id="custom-navbar">
+                <!-- <div> -->
+                {% if user.is_authenticated %}
+                <div class="login_navbar">
+                    <div class="loginmain_icon">
+                        <a class="custom-menu-nav-item" id="main_icon_a" href="/"><img src="/static/main_icon.png"
+                                alt="lifeplaylist.app" class="main_iconimage"> lifeplaylist.app</a>
+                        <a class="custom-menu-nav-item" id="logout" href="/logout">Logout</a>
+                    </div>
+                    <div class="personalplaylist_dashboard">
+                        <a class="custom-menu-nav-item" id="home" href="/app">My Life Playlist</a>
+                        <a class="custom-menu-nav-item" id="dashboard" href="/dashboard">Dashboard</a>
+                    </div>
+                </div>
+                {% else %}
+                <!-- <a class="custom-menu-nav-item" id="dashboard" href="/dashboard">Dashboard</a> -->
+                <div class="notlogin_navbar">
+                    <div class="main_icon">
+                        <a class="custom-menu-nav-item" id="main_icon_a" href="/"><img src="/static/main_icon.png"
+                                alt="lifeplaylist.app" class="main_iconimage"> lifeplaylist.app</a>
+                    </div>
+                    <div class="signup_login">
+                        <a class="custom-menu-nav-item" id="signUp" href="/sign-up">Sign up</a>
+                        <a class="custom-menu-nav-item" id="login" href="/login">Login</a>
+                    </div>
+                </div>
+                {% endif %}
+                <!-- </div> -->
+            </div>
+        </nav>
+
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -48,9 +85,12 @@
                 {% endif %}
             </div>
         </div>
-    </nav>
+    </nav> -->
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        <!-- Login Alert Messages 這裡先註解掉-->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for category, message in messages %}
     {% if category == 'error' %}
@@ -72,8 +112,17 @@
     {% endif %}
     {% endwith %}
 
-    <div class="container">
-        {% block content %}
+        <!-- Login Alert Messages 這裡先註解掉-->
+
+
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="intro_readme_wrapper">
+        {% block intro_readme %}
         {% endblock %}
     </div>
 

@@ -3,7 +3,7 @@ function deletePlaylistItem(playlistItemId) {
         method: "POST",
         body: JSON.stringify({ playlistItemId: playlistItemId }),
     }).then((_res) => {
-        window.location.href = "/";
+        window.location.href = "/app";
     });
 }
 

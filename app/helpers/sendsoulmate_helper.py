@@ -59,14 +59,14 @@ def save_soulmate_record_to_db(original_email, soulmate_email, db_artistsong_low
 
 # 寄信
 # email setting for sending soulemate's email to user
-def send_mail(current_user_email, soulmate_email, soulmate_firstname, send_soulmate_email_logger, song):
+def send_mail(current_user_email, soulmate_email, send_soulmate_email_logger, song):
     print('start to sent email')
     msg_title = 'Talk to your Life Playlist soulmate'
     msg_recipients = [current_user_email]
     msg = Message(msg_title, sender=MAIL_DEFAULT_SENDER,
                   recipients=msg_recipients)
     msg.html = render_template(
-        'soulmate_mail.html', soulmate_email=soulmate_email, soulmate_firstname=soulmate_firstname, current_user_email=current_user_email, song=song)
+        'soulmate_mail.html', soulmate_email=soulmate_email, current_user_email=current_user_email, song=song)
     try:
         mail.send(msg)
     except SMTPException as e:
@@ -103,14 +103,14 @@ def loop_all_user_playlist(current_user, all_user, current_artistsong_lowerstrip
                     # print(i.id)
                     # print(i.email)
                     your_soulmate_email = i.email
-                    your_soulmate_firstname = i.first_name
+                    # your_soulmate_firstname = i.first_name
                     need_send_email = check_soulmate_record_in_db(
                         current_user.email, your_soulmate_email, db_artistsong_lowerstrip)
                     if need_send_email:
                         save_soulmate_record_to_db(
                             current_user.email, your_soulmate_email, db_artistsong_lowerstrip)
                         send_mail(current_user.email, your_soulmate_email,
-                                  your_soulmate_firstname, send_soulmate_email_logger, song)
+                                  send_soulmate_email_logger, song)
 
 
 def check_same_song_lover(send_soulmate_email_logger):

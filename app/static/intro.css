@@ -1,0 +1,161 @@
+.intro_title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #272f2d;
+    padding: 1.3rem 0;
+}
+
+.intro_slogan {
+    font-size: 0.8rem;
+    color: #fff;
+    padding: 1.3rem 0;
+}
+
+.startusing_div {
+    padding: 2rem 0;
+}
+
+.startusing_div .startusing_button {
+    width: 200px;
+    height: 80px;
+    padding: 0;
+    border: 2px solid #000;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 5px 3px 7px rgb(73, 71, 71);
+}
+
+.startusing_div .startusing_a:hover {
+    background-color: #094d3c;
+    opacity: 0.8;
+    color: #fff;
+}
+
+.startusing_div .startusing_a {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: block;
+    line-height: 5rem;
+    background-color: #fff;
+    color: #094d3c;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-decoration: none;
+    border-radius: 10px;
+    /* border: 2px solid #000; */
+}
+
+.intro_description_div {
+    padding: 0 1rem;
+}
+
+
+/* Readme */
+
+.intro_readme {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color:#fff;
+}
+
+.intro_readmediv {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    padding: 4rem 0;
+}
+
+.intro_readmepointdiv {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.intro_readmepointdiv ul {
+    list-style: none;
+}
+
+@media (min-width: 568px) {
+    .intro_title {
+        font-size: 2rem;
+        padding: 1.3rem 2rem;
+    }
+
+    .intro_slogan {
+        font-size: 1.3rem;
+        padding: 1.3rem 3rem;
+    }
+
+    .intro_description_div {
+        padding: 0 3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .intro_title {
+        font-size: 2rem;
+        padding: 1.3rem 8rem;
+    }
+
+    .intro_slogan {
+        font-size: 1.3rem;
+        padding: 1.3rem 5rem;
+    }
+
+    .intro_description_div {
+        padding: 0 7rem;
+    }
+}
+
+@media (min-width: 960px) {
+    .intro_title {
+        font-size: 2rem;
+        padding: 1.3rem 10.5rem;
+    }
+
+    .intro_slogan {
+        font-size: 1.3rem;
+        padding: 1.3rem 10rem;
+    }
+
+    .intro_description_div {
+        padding: 0 10rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .intro_title {
+        /* font-size: 2rem; */
+        padding: 1.3rem 15rem;
+    }
+
+    .intro_slogan {
+        /* font-size: 1.3rem; */
+        padding: 1.3rem 13rem;
+    }
+
+    .intro_description_div {
+        padding: 0 15rem;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .intro_title {
+        font-size: 2.4rem;
+        padding: 1.3rem 20rem;
+    }
+
+    .intro_slogan {
+        /* font-size: 1.3rem; */
+        padding: 1.3rem 20rem;
+    }
+
+    .intro_description_div {
+        padding: 1.5rem 18rem;
+    }
+}
+
+

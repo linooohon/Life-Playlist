@@ -32,10 +32,10 @@ class User(db.Model, UserMixin):
     playlists = db.relationship('Playlist')
     # playlists = db.relationship('Playlist', backref='user')
 
-    def __init__(self, email, password, first_name):
+    def __init__(self, email, password):
         self.email = email
         self.password = password
-        self.first_name = first_name
+        # self.first_name = first_name
 
 
 class Dashboard(db.Model):

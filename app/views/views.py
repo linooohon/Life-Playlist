@@ -19,11 +19,11 @@ views 負責 url 對應處理
 views = Blueprint('views', __name__)
 
 
-@views.route('/', methods=['GET', 'POST'])
+@views.route('/app', methods=['GET', 'POST'])
 # @cache.cached(timeout=60, key_prefix='home') how to do/how it works/why can't use?
 @login_required
 def home():
-    print("/ GET 沒走 cache")
+    print("/app GET 沒走 cache")
     if request.method == 'POST':
         artist = request.form.get('artist')
         song = request.form.get('song')
@@ -65,6 +65,6 @@ def dashboard():
     return render_template("dashboard.html", dashboard_data=dashboard_data, user=current_user)
 
 
-@views.route('/intro', methods=['GET'])
+@views.route('/', methods=['GET'])
 def intro():
     return render_template("intro.html", user=current_user)

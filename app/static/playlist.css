@@ -1,6 +1,10 @@
 .playlists-div {
     display: flex;
     justify-content: center;
+    padding: 2rem 0;
+    border: 2px solid rgb(233, 196, 196);
+    box-shadow: 5px 2px 15px 5px rgb(138, 137, 137);
+    border-radius: 90% 6% 93% 5% / 5% 94% 7% 95%;
 }
 
 .personal_li .artistsong_image {
@@ -25,7 +29,10 @@
     display: flex;
     justify-content: space-evenly;
     border-radius: 90% 6% 93% 5% / 5% 94% 7% 95%;
-    border: dashed black 1px;
+    box-shadow: 5px 2px 15px 5px rgb(98, 97, 97);
+    border: dashed rgb(48, 48, 48) 1px;
+    max-width: 270px;
+    margin: auto;
 }
 
 .personal_ul>.personal_li:last-child {
@@ -42,6 +49,12 @@
     text-decoration: underline;
 }
 
+@media (min-width: 321px) {
+    .personal_li {
+        max-width: 300px;
+    }
+}
+
 
 @media (min-width: 768px) {
     #playlists {
@@ -51,6 +64,7 @@
     .personal_li {
         flex-direction: row;
         justify-content: space-between;
+        max-width: 800px;
     }
 
     .song_genre {

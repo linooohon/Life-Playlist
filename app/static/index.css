@@ -1,7 +1,7 @@
 h1 {
-    padding-top: 3rem;
-    color: #094d3c;
-    font-weight: 700;
+    /* padding-top: 3rem; */
+    /* color: #094d3c; */
+    /* font-weight: 700; */
 }
 
 p {
@@ -9,18 +9,18 @@ p {
 }
 
 html, body {
-    background-color:rgb(232, 199, 185);
+    /* background-color:rgb(232, 199, 185); */
     font-family: 'Ubuntu Mono', monospace;
 }
 
-#navbar .custom-menu-nav-item {
-    padding-left: 5px;
-    font-weight: 600;
-    font-size: 2rem;
+#custom-navbar .custom-menu-nav-item {
+    /* padding-left: 5px; */
+    /* font-weight: 600; */
+    /* font-size: 2rem; */
 }
 
-#navbar .custom-menu-nav-item:hover {
-    background-color:rgb(159, 157, 157);
+#custom-navbar .custom-menu-nav-item:hover {
+    /* background-color:rgb(159, 157, 157); */
 }
 
 input:focus {
@@ -48,7 +48,9 @@ input:focus {
     margin-top: 2rem;
 }
 
-#navbar {
+#custom-navbar {
+    /* display: flex; */
+    /* justify-content: center; */
     /* background-color:rgb(232, 199, 185); */
 }
 
@@ -78,8 +80,12 @@ input:focus {
 
 .dashboard-div {
     padding-top: 1rem;
+    padding-bottom: 1rem;
     display: flex;
     justify-content: center;
+    border: 2px solid rgb(233, 196, 196);
+    box-shadow: 5px 2px 15px 5px rgb(138, 137, 137);
+    border-radius: 30px;
 }
 
 .dashboard-ul {
@@ -91,14 +97,13 @@ input:focus {
     font-weight: 700;
     display: flex;
     justify-content: space-between;
-    /* letter-spacing: 1px; */
     border-radius: 10px;
     margin-top: 10px;
     margin-left: 15px;
 }
 
 .dashboard-li .artistsong_image{
-    width: 320px;
+    width: 265px;
     display: flex;
     justify-content: space-between;
 }
@@ -118,11 +123,27 @@ input:focus {
 } */
 
 .spotify {
-    color: #72d8bf;
+    color: #8cd4c2;
+    background-color: #000;
+    border-radius: 5px;
+    padding: 2px 3px;
+    font-size: 14px;
+}
+.spotify:hover {
+    color: #000;
+    background-color: #fff;
 }
 
 .youtube {
     color: #e79191;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2px 3px;
+}
+
+.youtube:hover {
+    color: #000;
+    background-color: #e79191;
 }
 
 .dashboard-a i{
@@ -148,11 +169,6 @@ input:focus {
     height: 3rem;
 }
 
-/* Intro */
-.intro_description {
-    padding: 0 10rem;
-}
-
 /* Footer */
 .footer {
     display: flex;
@@ -166,6 +182,13 @@ input:focus {
 
 .footer a:hover {
     color: #e95454;
+}
+
+
+@media (min-width: 321px) {
+    .dashboard-li .artistsong_image{
+        width: 320px;
+    }
 }
 
 @media (max-width: 1279px) {
@@ -200,8 +223,8 @@ input:focus {
         padding: 1rem 2rem;
     }
 
-    #navbar .custom-menu-nav-item {
-        font-size: 1.2rem;
+    #custom-navbar .custom-menu-nav-item {
+        /* font-size: 1.2rem; */
     }
 
     .intro_description {

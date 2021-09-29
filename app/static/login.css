@@ -1,0 +1,81 @@
+.login_navbar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 800px;
+    padding: 1rem 1rem;
+}
+
+.loginmain_icon {
+    display: flex;
+    justify-content: space-between;
+}
+
+.personalplaylist_dashboard {
+    display: flex;
+    justify-content: center;
+}
+
+.personalplaylist_dashboard a{
+    font-size: 1.1rem;
+    margin: 2rem 6px 0 6px;
+    color: #fff;
+}
+
+.personalplaylist_dashboard #home {
+    background-color: #094d3c;
+    box-shadow: 5px 3px 7px rgb(73, 71, 71);
+    border-radius: 10px;
+    padding: 5px 7px;
+    text-decoration: none;
+}
+
+.personalplaylist_dashboard #home:hover {
+    color: #094d3c;
+    background-color: #cba1a1;
+}
+
+.personalplaylist_dashboard #dashboard {
+    background-color: #094d3c;
+    box-shadow: 5px 3px 7px rgb(73, 71, 71);
+    border-radius: 10px;
+    padding: 5px 7px;
+    text-decoration: none;
+}
+
+.personalplaylist_dashboard #dashboard:hover {
+    color: #094d3c;
+    background-color: #cba1a1;
+}
+
+.login_navbar #logout {
+    color: #094d3c;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 0 4px;
+    position: relative;
+    bottom: 4px;
+    left: 2px;
+    text-decoration: none;
+}
+
+.login_navbar #logout:hover {
+    opacity: 0.8;
+}
+
+.loginmain_icon #main_icon_a {
+    color: #094d3c;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.loginmain_icon #main_icon_a:hover {
+    color: #000;
+}
+
+.loginmain_icon .main_iconimage{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    bottom: 3px;
+}
