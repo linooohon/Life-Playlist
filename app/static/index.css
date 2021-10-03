@@ -107,13 +107,14 @@ input:focus {
 }
 
 .dashboard-li .artistsong_image{
-    width: 265px;
+    width: 70px;
     display: flex;
     justify-content: space-between;
 }
 
 .dashboard-li .artistsong_image img {
-    width: 20%;
+    width: 70px;
+    height: 70px;
 }
 
 #dashboard_genre {
@@ -233,7 +234,8 @@ input:focus {
 
 @media (min-width: 321px) {
     .dashboard-li .artistsong_image{
-        width: 290px;
+        width: 260px;
+        height: 60px;
     }
 }
 
@@ -279,6 +281,7 @@ input:focus {
 
     .dashboard-li .artistsong_image img {
         width: 70px;
+        height: 70px;
     }
 
     .dashboard-ul {
