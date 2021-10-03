@@ -235,7 +235,7 @@ input:focus {
 @media (min-width: 321px) {
     .dashboard-li .artistsong_image{
         width: 280px;
-        height: 60px;
+        /* height: 60px; */
     }
 }
 
