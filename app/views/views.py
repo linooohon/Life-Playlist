@@ -37,7 +37,7 @@ def home():
                 artist=artist, song=song, user_id=current_user.id)
             db.session.add(new_playlist_item)
             db.session.commit()
-            flash('your love is added!', category='success')
+            # flash('your love is added!', category='success')
 
     return render_template("home.html", user=current_user)
 
