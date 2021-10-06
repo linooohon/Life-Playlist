@@ -23,6 +23,8 @@ MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
 
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
+GOOGLE_OAUTH2_CLIENT_ID = os.getenv('GOOGLE_OAUTH2_CLIENT_ID')
+
 def choose_db(config_name):
     if config_name == 'production':
         DB_NAME = os.getenv('DB_NAME_PRO')

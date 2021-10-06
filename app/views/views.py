@@ -9,8 +9,6 @@ import json
 
 from app.model.models import Playlist, Dashboard
 from app import db, cache
-# from app.settings import MAIL_USERNAME
-
 
 '''
 views 負責 url 對應處理

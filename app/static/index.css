@@ -163,15 +163,116 @@ input:focus {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 1rem 0;
+    border: 5px solid #8e9a97;
+    border: 5px solid #dbada9;
+    border-radius: 10px;
+    width: 300px;
+    margin: 1rem auto;
+    background-color:#939b98;
 }
 
 .loginsignup_formsection .form-group {
     width: 100%;
-    padding: 1rem 15rem;
+    padding: 1rem 0;
+}
+
+.loginsignup_formsection .form-control-email {
+    padding-bottom: 0;
+}
+
+.loginsignup_formsection .form-control-password {
+    padding-top: 1.5rem;
+}
+
+.loginsignup_formsection .form-control-password1 {
+    padding-bottom: 0;
+}
+
+.loginsignup_formsection .form-control-password2 {
+    /* padding-top: 1.5rem; */
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.loginsignup_formsection .form-control-email label {
+    width: 200px;
+    margin: auto;
+    display: block;
+}
+
+.loginsignup_formsection .form-control-password label {
+    width: 200px;
+    margin: auto;
+    display: block;
+}
+
+.loginsignup_formsection .form-control-password1 label{
+    width: 200px;
+    margin: auto;
+    display: block;
+}
+
+.loginsignup_formsection .form-control-password2 label{
+    width: 200px;
+    margin: auto;
+    display: block;
+}
+
+.loginsignup_formsection .form-group #email {
+    width: 200px;
+    margin: auto;
+}
+
+.loginsignup_formsection .form-group #password {
+    width: 200px;
+    margin: auto;
+}
+
+.loginsignup_formsection .form-group #password1 {
+    width: 200px;
+    margin: auto;
+}
+
+.loginsignup_formsection .form-group #password2 {
+    width: 200px;
+    margin: auto;
+}
+
+.form-control-email {
+    margin-bottom: 0;
 }
 
 .loginsignup_formsection .form-group .form-control{
-    height: 3rem;
+    height: 2.5rem;
+}
+
+.abcRioButton:hover {
+    opacity: 0.8;
+}
+
+.g-signin2 {
+    margin: 2rem 0;
+}
+
+.split-line {
+    width: 50%;
+    height: 1px;
+    margin: 1rem auto;
+    background-color: rgb(214, 211, 211);
+    position: relative;
+}
+
+.split-line p {
+    position: relative;
+    text-align: center;
+    top: -0.7rem;
+    background-color: rgb(230, 227, 227);
+    width: 1rem;
+    left: 50%;
+    border-radius: 5px;
+    color: rgb(145, 144, 144);
+    transform: translateX(-50%);
 }
 
 
@@ -235,27 +336,16 @@ input:focus {
 @media (min-width: 321px) {
     .dashboard-li .artistsong_image{
         width: 280px;
-        /* height: 60px; */
     }
 }
 
 @media (max-width: 1279px) {
-    .loginsignup_formsection .form-group {
-        width: 100%;
-        padding: 1rem 13rem;
-    }
-
     .intro_description {
         padding: 0 10rem;
     }
 }
 
 @media (max-width: 1023px) {
-    .loginsignup_formsection .form-group {
-        width: 100%;
-        padding: 1rem 8rem;
-    }
-
     .intro_description {
         padding: 0 6rem;
     }
@@ -264,15 +354,6 @@ input:focus {
 @media (max-width: 767px) {
     .dashboard-li {
         flex-direction: column;
-    }
-
-    .loginsignup_formsection .form-group {
-        width: 100%;
-        padding: 1rem 2rem;
-    }
-
-    #custom-navbar .custom-menu-nav-item {
-        /* font-size: 1.2rem; */
     }
 
     .intro_description {
@@ -289,3 +370,69 @@ input:focus {
         border-radius: 10px;
     }
 }
+
+@media (min-width: 450px) {
+    .loginsignup_formsection .form-group #email {
+        width: 300px;
+        /* margin: auto; */
+    }
+
+    .loginsignup_formsection .form-group #password {
+        width: 300px;
+        /* margin: auto; */
+    }
+
+    .loginsignup_formsection .form-group #password1 {
+        width: 300px;
+        /* margin: auto; */
+    }
+
+    .loginsignup_formsection .form-group #password2 {
+        width: 300px;
+        /* margin: auto; */
+    }
+
+    .loginsignup_formsection .form-control-email label {
+        width: 300px;
+        /* margin: auto; */
+        /* display: block; */
+    }
+
+    .loginsignup_formsection .form-control-password label {
+        width: 300px;
+        /* margin: auto; */
+        /* display: block; */
+    }
+
+    .loginsignup_formsection .form-control-password1 label {
+        width: 300px;
+        /* margin: auto; */
+        /* display: block; */
+    }
+
+    .loginsignup_formsection .form-control-password2 label {
+        width: 300px;
+        /* margin: auto; */
+        /* display: block; */
+    }
+
+    .abcRioButton {
+        width: 300px!important;
+    }
+
+    .split-line {
+        width: 300px;
+    }
+
+    .loginsignup_formsection {
+        width: 400px;
+    }
+}
+
+
+
+/* @media (min-width: 768px) {
+    .split-line {
+        width:  300px;
+    }
+} */

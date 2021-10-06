@@ -1,5 +1,7 @@
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+# from alembic import op
+# from sqlalchemy.sql.schema import UniqueConstraint
 
 from app import db
 
@@ -26,15 +28,21 @@ class Playlist(db.Model):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(150), unique=False)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     playlists = db.relationship('Playlist')
+    third_party = db.Column(db.String(150))
+    third_party_id = db.Column(db.String(150))
     # playlists = db.relationship('Playlist', backref='user')
 
-    def __init__(self, email, password):
+    def __init__(self, email, password, third_party, third_party_id):
         self.email = email
         self.password = password
+        self.third_party = third_party
+        self.third_party_id = third_party_id
+        # self.call()
+        # op.drop_constraint(self.email)
         # self.first_name = first_name
 
 

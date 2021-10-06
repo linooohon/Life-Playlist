@@ -16,13 +16,15 @@
                 <a href="{{ artist_and_song.artist_spotify_uri }}" class="dashboard-a spotify"><i
                         class="fab fa-spotify"></i>Listen now</a>
                 {% else %}
-                <span>Oops, not on Spotify</span>
+                <a href="#" class="dashboard-a spotify"><i
+                        class="fab fa-spotify"></i>Oops, no..</a>
                 {% endif %}
                 {% if artist_and_song.song_youtube_url != 'None' %}
                 <a href="{{ artist_and_song.song_youtube_url }}" class="dashboard-a youtube" target="_blank"><i
                         class="fab fa-youtube"></i>YouTube</a>
                 {% else %}
-                <sapn>Oops, not on Youtube</sapn>
+                <a href="#" class="dashboard-a youtube" target="_blank"><i
+                        class="fab fa-youtube"></i>No YT..</a>
                 {% endif %}
                 <select style="width:100px; height:20px;">
                     <option selected="Genre" disabled>Genre</option>
