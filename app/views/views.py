@@ -86,6 +86,8 @@ def intro():
 def google_sign_in():
     # request_data = json.loads(request.data)
     # token = request_data['id_token']
+    response = jsonify({"test": "testdata"})
+    response.headers.add('Access-Control-Allow-Origin', '*')
     token = request.json['id_token']
     try:
         id_info = id_token.verify_oauth2_token(
@@ -116,4 +118,5 @@ def google_sign_in():
     # print(r.status_code)
     # return r.status_code
     # return redirect(url_for('views.home'))
-    return jsonify({}), 200
+    print(response)
+    return response
