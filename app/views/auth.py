@@ -87,7 +87,7 @@ def sign_up_user_exist(email):
     return
 
 
-# https: // developers.google.com/identity/sign-in/web/backend-auth
+# https://developers.google.com/identity/sign-in/web/backend-auth
 # https://stackoverflow.com/questions/12909332/how-to-logout-of-an-application-where-i-used-oauth2-to-login-with-google
 # https://developers.google.com/identity/gsi/web/guides/revoke
 # https://stackoverflow.com/questions/20001229/how-to-get-posted-json-in-flask
