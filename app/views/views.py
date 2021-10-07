@@ -9,6 +9,8 @@ import json
 
 from app.model.models import Playlist, Dashboard
 from app import db, cache
+from app.settings import GOOGLE_OAUTH2_CLIENT_ID
+
 
 '''
 views 負責 url 對應處理
@@ -39,7 +41,7 @@ def home():
             db.session.commit()
             # flash('your love is added!', category='success')
 
-    return render_template("home.html", user=current_user)
+    return render_template("home.html", user=current_user, GOOGLE_OAUTH2_CLIENT_ID=GOOGLE_OAUTH2_CLIENT_ID)
 
 
 @views.route('/delete-playlist-item', methods=['POST'])

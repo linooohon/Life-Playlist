@@ -8,23 +8,29 @@ function onSignIn(googleUser) {
     
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.disconnect();
-    // fetch('/google_sign_in', {
-    //     method: "POST",
-    //     body: JSON.stringify({ "id_token": id_token }),
-    // }).then((_res) => {
-    //     console.log('js login success');
-    // });
-    $.ajax({
-        type: "POST",
-        url: '/google_sign_in',
-        data: JSON.stringify({ 'id_token': id_token }),
-        success: function () {
-            console.log('login success')
-            window.location.href = "/app";
-        },
-        dataType: 'json',
-        contentType: "application/json",
+
+    fetch('/google_sign_in', {
+        method: "POST",
+        body: JSON.stringify({ id_token: id_token }),
+        headers: {
+            "content-type": "application/json"
+        }
+    }).then((_res) => {
+        console.log(_res);
+        console.log('js login success');
+        window.location.href = "/app";
     });
+    // $.ajax({
+    //     type: "POST",
+    //     url: '/google_sign_in',
+    //     data: JSON.stringify({ 'id_token': id_token }),
+    //     success: function () {
+    //         console.log('login success')
+    //         window.location.href = "/app";
+    //     },
+    //     dataType: 'json',
+    //     contentType: "application/json",
+    // });
 }
 
 
@@ -43,7 +49,7 @@ function onLoadCallback() {
 
 
 function onLoadSignUpCallback() {
-    $('span[id^="not_signed_"]').html('Sign in with Google');
+    $('span[id^="not_signed_"]').html('Login with Google');
     $('span[id^="not_signed_"]').css("letter-spacing", "1px");
     $('span[id^="not_signed_"]').css("margin-right", "20px");
     $('span[id^="not_signed_"]').css("font-weight", "600");
