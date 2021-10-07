@@ -10,6 +10,7 @@ import json
 from app.model.models import Playlist, Dashboard, User
 from app import db, cache
 from app.settings import GOOGLE_OAUTH2_CLIENT_ID
+from flask_cors import CORS
 
 from google.oauth2 import id_token
 import google.auth.transport.requests as google_requests
@@ -21,7 +22,7 @@ views 負責 url 對應處理
 '''
 # Make views' Blueprint instance
 views = Blueprint('views', __name__)
-
+CORS(views)
 
 @views.route('/app', methods=['GET', 'POST'])
 # @cache.cached(timeout=60, key_prefix='home') how to do/how it works/why can't use?
@@ -88,6 +89,7 @@ def google_sign_in():
     # token = request_data['id_token']
     response = jsonify({"test": "testdata"})
     response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add("Content-Type", 'text/plain')
     token = request.json['id_token']
     try:
         id_info = id_token.verify_oauth2_token(
