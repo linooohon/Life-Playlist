@@ -22,7 +22,7 @@ function onSignIn(googleUser) {
     let headers = {
         "Content-Type": "application/json",
     }
-    fetch("/google_sign_in", {
+    fetch("/google-sign-in", {
         method: "POST",
         body: JSON.stringify(body),
         headers: headers,

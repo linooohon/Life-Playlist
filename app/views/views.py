@@ -83,13 +83,14 @@ def intro():
 # https://petertc.medium.com/openid-connect-a27e0a3cc2ae
 # https://developers.google.com/identity/sign-in/web/sign-in
 # flask run -h localhost -p 5000, google sign in need localhost
-@views.route('/google_sign_in', methods=['POST'])
+@views.route('/google-sign-in', methods=['POST', 'OPTIONS'])
 def google_sign_in():
     # request_data = json.loads(request.data)
     # token = request_data['id_token']
     response = jsonify({"test": "testdata"})
     response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add("Content-Type", 'text/plain')
+    response.headers.add("Content-Type", 'application/json')
+    response.headers.add("Access-Control-Allow-Headers", 'content-type')
     token = request.json['id_token']
     try:
         id_info = id_token.verify_oauth2_token(
@@ -122,3 +123,11 @@ def google_sign_in():
     # return redirect(url_for('views.home'))
     print(response)
     return response
+
+
+# @views.route('/google_sign_in', methods=['OPTIONS'])
+# def google_sign_in():
+#     response = jsonify({"test": "testdata"})
+#     response.headers.add('Access-Control-Allow-Origin', '*')
+#     response.headers.add("Access-Control-Allow-Headers", 'content-type')
+#     return response
