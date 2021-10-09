@@ -86,13 +86,13 @@ def intro():
 @views.route('/google-sign-in', methods=['POST', 'OPTIONS'])
 def google_sign_in():
     print("進來 google_sign_in")
-    # request_data = json.loads(request.data)
-    # token = request_data['id_token']
+    request_data = json.loads(request.data)
+    token = request_data['id_token']
     response = jsonify({"test": "testdata"})
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add("Content-Type", 'application/json')
     response.headers.add("Access-Control-Allow-Headers", 'content-type')
-    token = request.json['id_token']
+    # token = request.json['id_token']
     try:
         id_info = id_token.verify_oauth2_token(
             token, google_requests.Request(), GOOGLE_OAUTH2_CLIENT_ID
