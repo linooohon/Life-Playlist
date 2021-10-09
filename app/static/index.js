@@ -8,7 +8,11 @@ function deletePlaylistItem(playlistItemId) {
 }
 
 
+
 function onSignIn(googleUser) {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.disconnect();
+
     let id_token = googleUser.getAuthResponse().id_token;
     let profile = googleUser.getBasicProfile();
     console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -22,30 +26,26 @@ function onSignIn(googleUser) {
     let headers = {
         "Content-Type": "application/json",
     }
-    fetch("/google-sign-in", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: headers,
-    }).then((_res) => {
-        console.log(_res);
-        console.log("js login success");
-        window.location.href = "/app";
-    });
-    // $.ajax({
-    //     type: "POST",
-    //     url: '/google_sign_in',
-    //     data: JSON.stringify({ 'id_token': id_token }),
-    //     success: function () {
-    //         console.log('login success')
-    //         window.location.href = "/app";
-    //     },
-    //     dataType: 'json',
-    //     contentType: "application/json",
+    // fetch("/google-sign-in", {
+    //     method: "POST",
+    //     body: JSON.stringify(body),
+    //     headers: headers,
+    // }).then((_res) => {
+    //     console.log(_res);
+    //     console.log("js login success");
+    //     window.location.href = "/app";
     // });
-
-
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.disconnect();
+    $.ajax({
+        type: "POST",
+        url: '/google-sign-in',
+        data: JSON.stringify({ 'id_token': id_token }),
+        success: function () {
+            console.log('login success')
+            window.location.href = "/app";
+        },
+        dataType: 'json',
+        contentType: "application/json",
+    });
 }
 
 

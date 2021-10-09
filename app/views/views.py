@@ -85,6 +85,7 @@ def intro():
 # flask run -h localhost -p 5000, google sign in need localhost
 @views.route('/google-sign-in', methods=['POST', 'OPTIONS'])
 def google_sign_in():
+    print("進來 google_sign_in")
     # request_data = json.loads(request.data)
     # token = request_data['id_token']
     response = jsonify({"test": "testdata"})
