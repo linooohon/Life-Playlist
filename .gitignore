@@ -143,6 +143,7 @@ cython_debug/
 
 
 
+
 # ---------------------------------------------------
 
 
@@ -191,3 +192,11 @@ migrations/
 
 # wsgi.ini 之前的測試檔，目前使用 dev.ini 和 app.ini
 wsgi.ini
+
+
+_personalfolder/
+_testingfolder/
+
+
+# gcp
+client_secret.json

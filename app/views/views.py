@@ -15,6 +15,9 @@ from flask_cors import CORS
 from google.oauth2 import id_token
 import google.auth.transport.requests as google_requests
 
+# from app.helpers.cloud_function import updatedashboard_genresurl_helper
+
+
 
 
 '''
@@ -72,6 +75,7 @@ def dashboard():
 
 @views.route('/', methods=['GET'])
 def intro():
+    # updatedashboard_genresurl_helper.update_dashboard_url()
     return render_template("intro.html", user=current_user)
 
 

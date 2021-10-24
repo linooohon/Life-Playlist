@@ -2,7 +2,13 @@ import sys
 import collections
 import time
 import random
-# import logging
+import json
+import pkgutil
+from google.cloud import bigquery
+# from google.cloud import bigquery_storage_v1beta1.reader.ReadRowsIterable
+from google.oauth2 import service_account
+from app.settings import GCP_PROJECT_NAME
+
 
 from datetime import datetime
 from threading import current_thread
@@ -11,7 +17,6 @@ from youtubesearchpython import VideosSearch
 from app import db, sp
 from app.model.models import Playlist, Dashboard
 from app.repo.repo import Repo
-
 
 
 def search_on_youtube(artist_and_song):
@@ -42,6 +47,117 @@ def search_on_spotify(artist):
         pic_url = r['artists']['items'][0]['images'][0]['url']
         genres = r['artists']['items'][0]['genres']
         return uri, pic_url, genres
+
+
+def get_dashboard_artistandgenres_list():
+    dashboard_data = Dashboard.query.all()
+    dashboard_raw_list = []
+    for i in dashboard_data:
+        item = {
+            "dashboard_artist": i.dashboard_artist,
+            "artist_genres": i.artist_genres
+        }
+        dashboard_raw_list.append(item)
+        # print(i.artist_genres)
+    return dashboard_raw_list
+
+
+def compare_genres_and_find_uri(dashboard_list_, total_df_list_):
+    total_list = []
+    for i in dashboard_list_:
+        pair_list = []
+        total_list.append(pair_list)
+        for j in total_df_list_:
+            for genre in i['artist_genres']:
+                concat_genre = 'the sound of ' + genre
+                if concat_genre == j[2].lower():
+                    uri, name = j[1], j[2]
+                    data = {
+                        "uri": uri,
+                        "name": name,
+                        "genre": genre
+                    }
+                    pair_list.append(data)
+
+    print(total_list)
+    return total_list
+
+
+def insert_genres_uri(total_list):
+    dashboard_data = Dashboard.query.all()
+    try:
+        for index, item in enumerate(dashboard_data):
+            item.artist_genres_spotify_uri = total_list[index]
+            db.session.commit()
+            print("update to db success")
+    except Exception as ex:
+        print(f"Fail: {ex}")
+        return False
+    return True
+
+
+def get_thesoundsofspotify_playlist_bigquery_data():
+    service_account_info = pkgutil.get_data("app", "config/client_secret.json")
+    credentials = service_account.Credentials.from_service_account_info(
+        json.loads(service_account_info.decode()))
+    print("111111")
+    # with open('client_secret.json', newline='') as jsonfile:
+    # client_secret_list = json.load(jsonfile)     ##或者這樣 client_secret_list = json.loads(jsonfile.read())
+    # credentials = service_account.Credentials.from_service_account_info(client_secret_list)
+    client = bigquery.Client(project=GCP_PROJECT_NAME, credentials=credentials)
+    # print(client)
+    # print("22222")
+    # # Download a table.
+    # table_id = "my-app-324417.demo.demo_table_name"
+    # table = bigquery.TableReference.from_string(table_id)
+    # print(table)
+    # rows = client.list_rows(
+    #     table,
+    #     selected_fields=[
+    #         bigquery.SchemaField("index", "INT64"),
+    #         bigquery.SchemaField("uri", "STRING"),
+    #         bigquery.SchemaField("name", "STRING"),
+    #     ],
+    # )
+    # for i in rows:
+    #     print(i)
+    # print(type(rows))
+    # dataframe = rows.to_dataframe()
+    # print("123")
+    # print(dataframe)
+    # total_df_list_ = dataframe.values.tolist()
+    # print(total_df_list_)
+    # return ["123"]
+
+    sql = """
+        SELECT *
+        FROM `my-app-324417.demo.demo_table_name`
+    """
+    query_job = client.query(sql)
+    df = query_job.to_dataframe()
+    print(df)
+    try:
+        total_df_list_ = df.values.tolist()
+    except Exception as ex:
+        print(ex)
+    print(total_df_list_)
+    return total_df_list_
+
+    # print("Query results:")
+    # print(df)
+    # print("\nGet 1st row values")
+    # print(df.iloc[0])
+
+
+def update_thesoundsofspotify_playlist_uri_to_dashboard_db():
+    total_df_list_ = get_thesoundsofspotify_playlist_bigquery_data()
+    print("1")
+    dashboard_list_ = get_dashboard_artistandgenres_list()
+    print("2")
+    total_list = compare_genres_and_find_uri(dashboard_list_, total_df_list_)
+    print("3")
+    if insert_genres_uri(total_list):
+        return "update dashboard genres uri successful."
 
 
 def fetch_spotify_youtube(dashboard_update_logger):
@@ -101,8 +217,9 @@ def fetch_spotify_youtube(dashboard_update_logger):
             artist_and_song = i.artist + i.song
             i.youtube_url = search_on_youtube(artist_and_song)
             # find artist's page on spotify
-            i.spotify_uri, i.spotify_image_url, i.genres = search_on_spotify(i.artist)
-            
+            i.spotify_uri, i.spotify_image_url, i.genres = search_on_spotify(
+                i.artist)
+
             data_dict = {
                 "dashboard_artist": i.artist,
                 "dashboard_song": i.song,
@@ -117,14 +234,14 @@ def fetch_spotify_youtube(dashboard_update_logger):
         print("update to db success")
         dashboard_update_logger.info(
             f"SUCCESS, fetch spotify and youtube api, finished updated dashboard -> time: {current_time}")
+        update_thesoundsofspotify_playlist_uri_to_dashboard_db()
+        dashboard_update_logger.info(
+            f"SUCCESS, update dashboard genres uri successful. -> time: {current_time}")
     except:
         dashboard_update_logger.info(
             f"FAIL, fetch spotify and youtube api, updating dashboard have some problem -> time: {current_time}")
         print("Unexpected error when execute spotify youtube api:",
               sys.exc_info()[0])
-
-
-
 
 
 

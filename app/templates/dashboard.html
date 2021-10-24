@@ -26,10 +26,16 @@
                 <a href="#" class="dashboard-a youtube" target="_blank"><i
                         class="fab fa-youtube"></i>No YT..</a>
                 {% endif %}
-                <select style="width:100px; height:20px;">
+                <!-- <select style="width:100px; height:20px;">
                     <option selected="Genre" disabled>Genre</option>
                     {% for genre in artist_and_song.artist_genres %}
                     <option>{{ genre }}</option>
+                    {% endfor %}
+                </select> -->
+                <select style="width:100px; height:20px;" onchange="window.open(this.options[this.selectedIndex].value)">
+                    <option selected="Genre" disabled>Genre</option>
+                    {% for genre_uri in artist_and_song.artist_genres_spotify_uri %}
+                    <option value="{{ genre_uri.uri }}">{{ genre_uri.genre }}</option>
                     {% endfor %}
                 </select>
             </p>

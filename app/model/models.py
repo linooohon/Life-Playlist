@@ -53,6 +53,7 @@ class Dashboard(db.Model):
     artist_spotify_uri = db.Column(db.String(500))
     artist_spotify_image_url = db.Column(db.String(500))
     artist_genres = db.Column(db.JSON)
+    artist_genres_spotify_uri = db.Column(db.JSON)
     song_youtube_url = db.Column(db.String(500))
 
     def __init__(self, dashboard_artist, dashboard_song, artist_spotify_uri, song_youtube_url, artist_spotify_image_url, artist_genres):
