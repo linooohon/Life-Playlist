@@ -3,7 +3,8 @@ formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 log_file_list = [
     "dashboard_update.log",
     "send_soulmate_email.log",
-    "userplaylist_update.log"
+    "userplaylist_update.log",
+    "thesoundsofspotifyplaylist_update_to_bigquery.log",
     ]
 
 def setup_logger(name, log_file, level=logging.INFO):

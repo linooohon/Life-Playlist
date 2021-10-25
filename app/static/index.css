@@ -100,6 +100,9 @@ input:focus {
     border-radius: 10px;
     margin-top: 10px;
     margin-left: 15px;
+    border: 1px#edeeee;
+    padding: 5px;
+    border-style: dashed;
 }
 
 .dashboard-li p{
@@ -119,8 +122,23 @@ input:focus {
 
 #dashboard_genre {
     margin-left: 1rem;
+    margin-top: 5px;
     /* display: inline; */
 }
+
+#dashboard_genre a{
+    text-decoration: none;
+    color: #094d3c;
+    font-weight: 600;
+    padding: 0 5px;
+    border: 1px solid #fff;
+}
+
+#dashboard_genre a:hover{
+    color: rgb(21, 19, 19);
+    border: 1px solid #094d3c;
+}
+
 
 /* .dashboard-li .spotify_and_youtube {
     display: flex;

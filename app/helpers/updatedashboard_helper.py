@@ -100,7 +100,7 @@ def get_thesoundsofspotify_playlist_bigquery_data():
     service_account_info = pkgutil.get_data("app", "config/client_secret.json")
     credentials = service_account.Credentials.from_service_account_info(
         json.loads(service_account_info.decode()))
-    print("111111")
+    # print("111111")
     # with open('client_secret.json', newline='') as jsonfile:
     # client_secret_list = json.load(jsonfile)     ##或者這樣 client_secret_list = json.loads(jsonfile.read())
     # credentials = service_account.Credentials.from_service_account_info(client_secret_list)
@@ -135,12 +135,12 @@ def get_thesoundsofspotify_playlist_bigquery_data():
     """
     query_job = client.query(sql)
     df = query_job.to_dataframe()
-    print(df)
+    # print(df)
     try:
         total_df_list_ = df.values.tolist()
     except Exception as ex:
         print(ex)
-    print(total_df_list_)
+    # print(total_df_list_)
     return total_df_list_
 
     # print("Query results:")
@@ -151,11 +151,11 @@ def get_thesoundsofspotify_playlist_bigquery_data():
 
 def update_thesoundsofspotify_playlist_uri_to_dashboard_db():
     total_df_list_ = get_thesoundsofspotify_playlist_bigquery_data()
-    print("1")
+    # print("1")
     dashboard_list_ = get_dashboard_artistandgenres_list()
-    print("2")
+    # print("2")
     total_list = compare_genres_and_find_uri(dashboard_list_, total_df_list_)
-    print("3")
+    # print("3")
     if insert_genres_uri(total_list):
         return "update dashboard genres uri successful."
 
@@ -165,7 +165,7 @@ def fetch_spotify_youtube(dashboard_update_logger):
     #     filename="dashboard_update.log", level=logging.INFO)
     # print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
     # print('call spotify and youtube api')
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow())
     try:
         repo = Repo(Playlist)
         all_playlist = repo.get_all()
@@ -233,13 +233,13 @@ def fetch_spotify_youtube(dashboard_update_logger):
             repo.insert_data(data_dict)
         print("update to db success")
         dashboard_update_logger.info(
-            f"SUCCESS, fetch spotify and youtube api, finished updated dashboard -> time: {current_time}")
+            f"SUCCESS, fetch spotify and youtube api, finished updated dashboard -> time: {current_time} / UTC+0")
         update_thesoundsofspotify_playlist_uri_to_dashboard_db()
         dashboard_update_logger.info(
-            f"SUCCESS, update dashboard genres uri successful. -> time: {current_time}")
+            f"SUCCESS, update dashboard genres uri successful. -> time: {current_time} / UTC+0")
     except:
         dashboard_update_logger.info(
-            f"FAIL, fetch spotify and youtube api, updating dashboard have some problem -> time: {current_time}")
+            f"FAIL, fetch spotify and youtube api, updating dashboard have some problem -> time: {current_time} / UTC+0")
         print("Unexpected error when execute spotify youtube api:",
               sys.exc_info()[0])
 

@@ -40,7 +40,7 @@ def update_user_playlist(userplaylist_update_logger):
     print(time.strftime("%A, %d. %B %Y %I:%M:%S %p"))
     user_playlists_withnullgenre = User.query.join(Playlist, User.id == Playlist.user_id).filter(
         Playlist.artist_genres == None).limit(100).all()
-    current_time = str(datetime.now())
+    current_time = str(datetime.utcnow())
     try:
         for i in user_playlists_withnullgenre:
             for j in i.playlists:
@@ -62,9 +62,9 @@ def update_user_playlist(userplaylist_update_logger):
                 db.session.commit()
                 print("update to db success")
                 userplaylist_update_logger.info(
-                    f"SUCCESS, fetch spotify api, finished updated user playlist -> time: {current_time}")
+                    f"SUCCESS, fetch spotify api, finished updated user playlist -> time: {current_time} / UTC+0")
     except:
         userplaylist_update_logger.info(
-            f"FAIL, fetch spotify api, updating user playlist have some problem -> time: {current_time}")
+            f"FAIL, fetch spotify api, updating user playlist have some problem -> time: {current_time} / UTC+0")
         print("Unexpected error when execute spotify api:",
               sys.exc_info()[0])

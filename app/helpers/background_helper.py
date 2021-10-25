@@ -1,9 +1,13 @@
 import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
+# import apscheduler.schedulers.blocking
+
+# scheduler = BackgroundScheduler('apscheduler.job_defaults.max_instances': '2')
 
 from app.helpers.updatedashboard_helper import fetch_spotify_youtube
 from app.helpers.sendsoulmate_helper import check_same_song_lover
 from app.helpers.updateuserplaylist_helper import update_user_playlist
+from app.helpers.cloud_function.fetch_thesoundsofspotifyplaylist_data_to_bigquery_helper import fetch_thesoundsofspotifyplaylist_data_to_bigquery_helper
 from app.helpers.logger_helper import setup_logger, clean_logger
 
 class BackgroundHelper():
@@ -15,7 +19,8 @@ class BackgroundHelper():
             self.soulmate_email_background_sending, 1, '2021-9-12 00:00:00')
         self.trigger_background_job(
             self.user_playlist_background_update, 1, '2021-9-13 13:00:00')
-
+        self.trigger_background_job(
+            self.fetch_thesoundsofspotifyplaylist_data_to_bigquery, 30, '2021-10-25 03:00:00')
         # clean log file
         self.trigger_background_job(
             clean_logger, 30, '2021-9-30 00:00:00')
@@ -40,9 +45,16 @@ class BackgroundHelper():
                 'userplaylist_update_logger', 'userplaylist_update.log')
             update_user_playlist(userplaylist_update_logger)
 
+    def fetch_thesoundsofspotifyplaylist_data_to_bigquery(self):
+        with self.app.app_context():
+            thesoundsofspotifyplaylist_update_to_bigquery_logger = setup_logger(
+                'thesoundsofspotifyplaylist_update_to_bigquery_logger', 'thesoundsofspotifyplaylist_update_to_bigquery.log')
+            fetch_thesoundsofspotifyplaylist_data_to_bigquery_helper(
+                thesoundsofspotifyplaylist_update_to_bigquery_logger)
+
     def trigger_background_job(self, event, period, start_date=None):
         scheduler = BackgroundScheduler(
-            {'apscheduler.timezone': 'UTC'})
+            {'apscheduler.timezone': 'UTC', 'apscheduler.job_defaults.max_instances': 2})
         scheduler.add_job(func=event,
                           trigger="interval", days=period, start_date=start_date)
         scheduler.start()

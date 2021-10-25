@@ -200,3 +200,6 @@ _testingfolder/
 
 # gcp
 client_secret.json
+
+# get google id token
+# get_google_id_token.py

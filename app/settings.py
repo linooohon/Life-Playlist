@@ -27,6 +27,8 @@ GOOGLE_OAUTH2_CLIENT_ID = os.getenv('GOOGLE_OAUTH2_CLIENT_ID')
 
 GCP_PROJECT_NAME = os.getenv('GCP_PROJECT_NAME')
 
+GCP_SERVICE_ID_TOKEN = os.getenv('GCP_SERVICE_ID_TOKEN')
+
 def choose_db(config_name):
     if config_name == 'production':
         DB_NAME = os.getenv('DB_NAME_PRO')
