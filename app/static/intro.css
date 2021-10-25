@@ -72,6 +72,7 @@
 .intro_readme .intro_readmepointdiv {
     display: flex;
     justify-content: center;
+    padding: 3rem 0;
     /* font-size: 1.3rem; */
 }
 
@@ -105,6 +106,33 @@
     height: 130px;
 }
 
+.second_description {
+    background-color: #4c9281;
+    color: rgb(9, 8, 8);
+    margin-top: 7rem;
+    padding: 4rem 0;
+}
+
+.second_description_p {
+    width: 300px;
+    margin-bottom: 0;
+    margin: auto;
+}
+
+.intro_pic2_div {
+    position: relative;
+    /* bottom: -6rem; */
+}
+
+.intro_pic2 {
+    position: relative;
+    bottom: -40px;
+    border-radius: 20px;
+    box-shadow: 5px 3px 12px 5px rgb(241, 211, 211);
+    width: 320px;
+    height: 250px;
+}
+
 @media (min-width: 568px) {
     .intro_title {
         font-size: 2rem;
@@ -128,6 +156,11 @@
         width: 480px;
         height: 230px;
         /* bottom: -120px; */
+    }
+
+    .intro_pic2 {
+        width: 580px;
+        height: 430px;
     }
 }
 

@@ -50,8 +50,24 @@ content %}
             <p class="intro_readmepointdiv_li">4. And maybe you will find your soulmates.</p>
         </div>
     </div>
+    <div class="intro_pic2_div" align="center">
+        <img src="/static/intro_pic2.png" alt="lifeplaylist.app" class="intro_pic2">
+    </div>
 </div>
 
 <script type="text/javascript" src="{{ url_for('static', filename='oauth.js') }}"></script>
 <script src="https://apis.google.com/js/platform.js?onload=onLoadSignUpCallback" async defer></script>
+{% endblock %}
+
+
+{% block second_description %}
+<div class="second_description">
+    <!-- <div align="center"> -->
+    <p class="second_description_p">
+        So, this is a small app, you can create your own playlist.
+        After you add your life songs to your personal Life Playlist, the information of the songs will update once
+        a day.
+    </p>
+    <!-- </div> -->
+</div>
 {% endblock %}
