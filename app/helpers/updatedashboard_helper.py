@@ -100,17 +100,13 @@ def get_thesoundsofspotify_playlist_bigquery_data():
     service_account_info = pkgutil.get_data("app", "config/client_secret.json")
     credentials = service_account.Credentials.from_service_account_info(
         json.loads(service_account_info.decode()))
-    # print("111111")
     # with open('client_secret.json', newline='') as jsonfile:
     # client_secret_list = json.load(jsonfile)     ##或者這樣 client_secret_list = json.loads(jsonfile.read())
     # credentials = service_account.Credentials.from_service_account_info(client_secret_list)
     client = bigquery.Client(project=GCP_PROJECT_NAME, credentials=credentials)
-    # print(client)
-    # print("22222")
     # # Download a table.
-    # table_id = "my-app-324417.demo.demo_table_name"
+    # table_id = "my-app-324417.demo.thesoundsofspotify_table"
     # table = bigquery.TableReference.from_string(table_id)
-    # print(table)
     # rows = client.list_rows(
     #     table,
     #     selected_fields=[
@@ -121,9 +117,7 @@ def get_thesoundsofspotify_playlist_bigquery_data():
     # )
     # for i in rows:
     #     print(i)
-    # print(type(rows))
     # dataframe = rows.to_dataframe()
-    # print("123")
     # print(dataframe)
     # total_df_list_ = dataframe.values.tolist()
     # print(total_df_list_)
@@ -131,7 +125,7 @@ def get_thesoundsofspotify_playlist_bigquery_data():
 
     sql = """
         SELECT *
-        FROM `my-app-324417.demo.demo_table_name`
+        FROM `my-app-324417.demo.thesoundsofspotify_table`
     """
     query_job = client.query(sql)
     df = query_job.to_dataframe()
@@ -151,11 +145,8 @@ def get_thesoundsofspotify_playlist_bigquery_data():
 
 def update_thesoundsofspotify_playlist_uri_to_dashboard_db():
     total_df_list_ = get_thesoundsofspotify_playlist_bigquery_data()
-    # print("1")
     dashboard_list_ = get_dashboard_artistandgenres_list()
-    # print("2")
     total_list = compare_genres_and_find_uri(dashboard_list_, total_df_list_)
-    # print("3")
     if insert_genres_uri(total_list):
         return "update dashboard genres uri successful."
 
