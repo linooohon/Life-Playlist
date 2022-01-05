@@ -2,6 +2,7 @@ import unittest
 from flask import url_for
 from app import create_app, mail
 from app.views import auth
+from app.settings import TEST_EMAIL_TARGET
 
 
 class SettingBase(unittest.TestCase):
@@ -40,7 +41,7 @@ class CheckSignUpAndLogin(SettingBase):
 # check soulmate email sending function is okay
 class CheckSoulmateEmailSending(SettingBase):
     def test_soulmate_email_send_success(self):
-        email = ['linooohon@gmail.com']
+        email = [TEST_EMAIL_TARGET]
         with mail.record_messages() as outbox:
             # already setting default sender in .env so here don't need to set sender
             mail.send_message(subject='testing', body='test', recipients=email)
