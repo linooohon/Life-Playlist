@@ -8,20 +8,19 @@
 - Based on playlist, recommend a book, brand, movie, something else..
 -->
 
+<div align="center">
+<img width="30%" alt="Screen Shot 2022-01-05 at 7 42 23 PM" src="https://user-images.githubusercontent.com/65331756/148212293-fcf3996c-a778-48c8-b039-29d652784c42.png">
+</div>
 
-
-<img width="50%" alt="Screen Shot 2021-08-30 at 8 29 13 PM" src="https://user-images.githubusercontent.com/65331756/131341050-0f14978b-1394-44f4-9ac1-09cc461530de.png">
-
-<img width="30%" alt="Screen Shot 2021-08-30 at 8 29 34 PM" src="https://user-images.githubusercontent.com/65331756/131341061-31d18df3-5950-48cc-a5ba-be24c1ca1e42.png">
-
-
-
+<div align="center">
+<img width="60%" alt="Screen Shot 2022-01-05 at 7 49 55 PM" src="https://user-images.githubusercontent.com/65331756/148213161-5c23e8aa-5e0b-42ee-bc45-fef4b05e0e22.png">
+</div>
 
 ## Still in progress 🤧 ~~
 
 ```
-- Sign up, and make your own life playlist.
 - Dashboard
+- Sign up, and make your own life playlist.
 - If someone has one song same with yours, you both will receive an email, and you guys can have a talk 🤡.
 ```
 
@@ -66,7 +65,7 @@ $ flask db upgrade
 
 
 ## 4. Run testing:
-1. Go to the path which is same as `main.py`.
+1. Under the path which is same as `main.py`.
 2. Then you can run,
 ```
 $ flask test
