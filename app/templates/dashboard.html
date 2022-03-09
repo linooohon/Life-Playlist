@@ -37,9 +37,13 @@
             </p>
         </li>
         <div style="display: flex; flex-wrap:wrap;" id="dashboard_genre">
-            {% for genre_uri in artist_and_song.artist_genres_spotify_uri %}
-            <a href="{{ genre_uri.uri }}">{{ genre_uri.genre }}</a>
-            {% endfor %}
+            {% if artist_and_song.artist_genres_spotify_uri is not none %}
+                {% for genre_uri in artist_and_song.artist_genres_spotify_uri %}
+                <a href="{{ genre_uri.uri }}">{{ genre_uri.genre }}</a>
+                {% endfor %}
+            {% else %}
+                <a href="{{ genre_uri.uri }}">Can't find genre, sorry!</a>
+            {% endif %}
         </div>
         <!-- <div id="dashboard_genre">
             {% for genre in artist_and_song.artist_genres %}
