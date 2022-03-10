@@ -41,6 +41,10 @@
                 {% for genre_uri in artist_and_song.artist_genres_spotify_uri %}
                 <a href="{{ genre_uri.uri }}">{{ genre_uri.genre }}</a>
                 {% endfor %}
+            {% else if artist_and_song.artist_genres is not none %}
+                {% for genre in artist_and_song.artist_genres %}
+                <a href="#">{{ genre }}</a>
+                {% endfor %}
             {% else %}
                 <a href="#">Can't find genre, sorry!</a>
             {% endif %}
