@@ -125,7 +125,7 @@ def get_thesoundsofspotify_playlist_bigquery_data():
 
     sql = """
         SELECT *
-        FROM `my-app-324417.demo.thesoundsofspotify_table`
+        FROM `lifeplaylistforfun.thesoundsofspotify.genreslist`
     """
     query_job = client.query(sql)
     df = query_job.to_dataframe()
