@@ -15,22 +15,27 @@
                 {% for genre in artistAndSong.artist_genres %}
                 <span> / {{ genre }}</span>
                 {% endfor %}
+                {% elif artistAndSong.artist_genres == 'None' %}
+                <span>Can't find genre.🦻</span>
                 {% else %}
-                <!-- <span>Finding genre 🦻</span> -->
+                <span>Come back tomorrow! 🦻</span>
                 {% endif %}
             </div>
             <div class="artistsong_image">
-                {% if artistAndSong.artist_spotify_image_url != None %}
+                {% if artistAndSong.artist_spotify_image_url != 'None' %}
                 <img src="{{ artistAndSong.artist_spotify_image_url }}" alt="Life Playlist Image" width="100px">
                 {% else %}
+                <p>Can't find album cover😵‍💫</p>
                 {% endif %}
                 <div>
-                    {% if artistAndSong.artist_spotify_uri != None %}
+                    {% if artistAndSong.artist_spotify_uri != 'None' %}
                     <a href="{{ artistAndSong.artist_spotify_uri }}" class="dashboard-a spotify"><i
                             class="fab fa-spotify"></i>Listen
                         now</a>
-                    {% else %}
+                    {% elif artistAndSong.artist_genres is none %}
                     <a href="#" class="dashboard-a spotify"><i class="fab fa-spotify"></i>Update soon</a>
+                    {% else %}
+                    <a href="#" class="dashboard-a spotify"><i class="fab fa-spotify"></i>Can't find spotify uri.</a>
                     {% endif %}
                 </div>
             </div>

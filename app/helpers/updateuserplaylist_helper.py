@@ -28,9 +28,15 @@ def search_on_spotify(artist):
     if r['artists']['total'] == 0:
         return 'None', 'None', 'None'
     else:
-        uri = r['artists']['items'][0]['uri']
-        pic_url = r['artists']['items'][0]['images'][0]['url']
-        genres = r['artists']['items'][0]['genres']
+        uri = 'None'
+        pic_url = 'None'
+        genres = 'None'
+        if r['artists']['items'][0]['uri'] != '':
+            uri = r['artists']['items'][0]['uri']
+        if len(r['artists']['items'][0]['images']) > 0:
+            pic_url = r['artists']['items'][0]['images'][0]['url']
+        if len(r['artists']['items'][0]['genres']) > 0:
+            genres = r['artists']['items'][0]['genres']
         return uri, pic_url, genres
 
 
