@@ -11,31 +11,32 @@
         <li class="list-group-item personal_li">
             <div class="song_genre">
                 <p class="artist_song">{{ artistAndSong.artist }} - {{ artistAndSong.song }}</p>
-                {% if artistAndSong.artist_genres != None %}
+                {% if artistAndSong.artist_genres is none %}
+                <span>Come back tomorrow! 🦻</span>
+                {% elif artistAndSong.artist_genres == "Can't find" %}
+                <span>Can't find genre.🦻</span>
+                {% else %}
                 {% for genre in artistAndSong.artist_genres %}
                 <span> / {{ genre }}</span>
                 {% endfor %}
-                {% elif artistAndSong.artist_genres == 'None' %}
-                <span>Can't find genre.🦻</span>
-                {% else %}
-                <span>Come back tomorrow! 🦻</span>
                 {% endif %}
             </div>
             <div class="artistsong_image">
-                {% if artistAndSong.artist_spotify_image_url != 'None' %}
-                <img src="{{ artistAndSong.artist_spotify_image_url }}" alt="Life Playlist Image" width="100px">
-                {% else %}
+                {% if artistAndSong.artist_spotify_image_url is none %}
+                <p> 🎵 </p>
+                {% elif artistAndSong.artist_spotify_image_url == "Can't find" %}
                 <p>Can't find album cover😵‍💫</p>
+                {% else %}
+                <img src="{{ artistAndSong.artist_spotify_image_url }}" alt="Life Playlist Image" width="100px">
                 {% endif %}
                 <div>
-                    {% if artistAndSong.artist_spotify_uri != 'None' %}
-                    <a href="{{ artistAndSong.artist_spotify_uri }}" class="dashboard-a spotify"><i
-                            class="fab fa-spotify"></i>Listen
-                        now</a>
-                    {% elif artistAndSong.artist_genres is none %}
+                    {% if artistAndSong.artist_spotify_uri is none %}
                     <a href="#" class="dashboard-a spotify"><i class="fab fa-spotify"></i>Update soon</a>
-                    {% else %}
+                    {% elif artistAndSong.artist_spotify_uri == "Can't find" %}
                     <a href="#" class="dashboard-a spotify"><i class="fab fa-spotify"></i>Can't find spotify uri.</a>
+                    {% else %}
+                    <a href="{{ artistAndSong.artist_spotify_uri }}" class="dashboard-a spotify"><i
+                            class="fab fa-spotify"></i>Listen now</a>
                     {% endif %}
                 </div>
             </div>
