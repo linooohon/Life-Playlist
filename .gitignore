@@ -106,7 +106,6 @@ celerybeat.pid
 
 # Environments
 .env
-.venv
 env/
 venv/
 ENV/
@@ -203,3 +202,8 @@ client_secret.json
 
 # get google id token
 # get_google_id_token.py
+
+
+# poetry
+.venv
+poetry.toml
