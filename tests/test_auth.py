@@ -44,6 +44,7 @@ class CheckSoulmateEmailSending(SettingBase):
         email = [TEST_EMAIL_TARGET]
         with mail.record_messages() as outbox:
             # already setting default sender in .env so here don't need to set sender
+            # mail.send_message(subject='testing', body='test', recipients=email, sender="lifeplaylistforfun@gmail.com")
             mail.send_message(subject='testing', body='test', recipients=email)
             assert len(outbox) == 1
             assert outbox[0].subject == 'testing'
