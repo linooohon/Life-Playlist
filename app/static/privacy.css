@@ -1,0 +1,17 @@
+
+
+.privacy_intro {
+    /* width: 600px; */
+    /* margin: auto; */
+    padding: 0 45px;
+}
+
+.privacy_intro h1 {
+    text-align: center;
+}
+
+
+.privacy_intro h2 {
+    font-size: 24px;
+    font-weight: 600;
+}

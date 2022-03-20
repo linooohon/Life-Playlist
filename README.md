@@ -70,3 +70,6 @@ $ flask db upgrade
 ```
 $ flask test
 ```
+
+
+<!-- - privacy policy: https://www.privacypolicytemplate.net/live.php?token=NLg2HHv5dBjmHU0lMNOWJlRqGQWgoCUF -->

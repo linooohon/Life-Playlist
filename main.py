@@ -63,6 +63,7 @@ trigger_background_job = BackgroundHelper(app)
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    app.run()
+    # app.run(debug=True, use_reloader=True)
     # app.run(debug=True, use_reloader=True, host="localhost", port=5000)
     # app.run(debug=True)

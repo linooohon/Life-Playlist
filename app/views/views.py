@@ -136,3 +136,8 @@ def google_sign_in():
 #     response.headers.add('Access-Control-Allow-Origin', '*')
 #     response.headers.add("Access-Control-Allow-Headers", 'content-type')
 #     return response
+
+
+@views.route('/privacy', methods=['GET'])
+def privacy():
+    return render_template("privacy_policy.html", user=current_user)
